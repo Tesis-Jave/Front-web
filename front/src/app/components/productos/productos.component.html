@@ -1,0 +1,136 @@
+<body>
+  <div class="left-side">
+    <div class="left-side">
+      <div class="button-container">
+        <button type="button" class="btn btn-primary btn-lg">Modificar</button>
+        <!-- Boton de creacion y cancelacion -->
+        <div>
+          <div *ngIf="!createLayoutActivate">
+            <button
+              type="button"
+              (click)="launchCreateFormLayout()"
+              class="btn btn-primary btn-lg"
+            >
+              crear
+            </button>
+          </div>
+          <div *ngIf="createLayoutActivate || updateLayoutActivate">
+            <button
+              class="btn btn-primary btn-lg"
+              (click)="closeInputFormLayout()"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg">Eliminar</button>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+
+    <div class="accept-button"  *ngIf="createLayoutActivate || updateLayoutActivate">
+      <button type="button" class="btn btn-success">Crear</button>
+    </div>
+    <div class="top-box">
+      <!-- Formulario -->
+
+      <!-- <div
+        
+        *ngIf="createLayoutActivate || updateLayoutActivate"
+      > -->
+      <!-- intercambiar -->
+      <div> 
+      <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
+        <div class="form-row">
+
+          <div class="form-group col-md-2">
+            <label for="CODARTICULO">Codigo de articulo</label>
+            <input type="number" class="form-control" id="CODARTICULO">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="DESCRIPCION">Descripción</label>
+          <input type="text" class="form-control" id="DESCRIPCION">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Address 2</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" id="inputCity">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">State</label>
+            <select id="inputState" class="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Zip</label>
+            <input type="text" class="form-control" id="inputZip">
+          </div>
+        </div>
+    
+        
+      </form>
+
+      <!-- <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
+        <div class="input-container">
+          <label>Nombre del producto</label>
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Ingrese el nombre"
+            [ngModel]="productoInfo.nombre"
+          />
+        </div>
+        <div class="input-container">
+          <label>Descripción del producto</label>
+          <input
+            type="text"
+            formControlName="description"
+            placeholder="Ingrese la descripción"
+            [ngModel]="productoInfo.descripcion"
+          />
+        </div>
+        <div class="input-container">
+          <label>Precio del producto</label>
+          <input
+            type="number"
+            formControlName="price"
+            placeholder="Ingrese el precio"
+            [ngModel]="productoInfo.precio"
+          />
+        </div>
+        <div class="input-container">
+          <label>Stock del producto</label>
+          <input
+            type="number"
+            formControlName="stock"
+            placeholder="Ingrese el stock"
+            [ngModel]="productoInfo.stock"
+          />
+        </div>
+      </form> -->
+
+
+      </div>
+    </div>
+    <div class="main-content">
+      <!-- Contenido principal que ocupará la mayor parte del right-side -->
+      <p>productos...</p>
+    </div>
+  </div>
+</body>
