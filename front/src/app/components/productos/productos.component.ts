@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Producto } from '../../models/tiendas/producto';
 import { FormsModule } from '@angular/forms';
+import { Articulo } from 'src/app/models/productos/articulo';
 
 @Component({
   selector: 'app-producto',
@@ -13,17 +13,21 @@ export class ProductoComponent {
     private formBuilder: FormBuilder
   ) // declarar servicio de productos
   {}
-  labels: string[] = [];
-  productoInfo: Producto = new Producto(0, '', '', 0, 0);
+  labels: string[] = ['id', 'nombre', 'precio'];
+  productoInfo: Articulo = new Articulo(0,'',0,0,'','',0,'');
   createLayoutActivate: boolean = false;
   updateLayoutActivate: boolean = false;
   formButtonLayoutTitle: string = '';
 
   createProductform = this.formBuilder.group({
-    nombre: [''],
+    id: [''],
     descripcion: [''],
-    precio: [''],
-    stock: [''],
+    departamento: [''],
+    seccion: [''],
+    refProveedor: [''],
+    unidadMedida: [''],
+    medidaReferencia: [''],
+    tipoArticulo: ['']
   });
 
   launchCreateFormLayout() {
@@ -34,9 +38,11 @@ export class ProductoComponent {
   closeInputFormLayout() {
     this.createLayoutActivate = false;
     this.updateLayoutActivate = false;
-    this.productoInfo = new Producto(0, '', '', 0, 0);
+    this.productoInfo = new Articulo(0,'',0,0,'','',0,'');
     this.createProductform.reset();
   }
 
   onSubmit() {}
+
+
 }
