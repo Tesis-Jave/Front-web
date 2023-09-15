@@ -10,7 +10,6 @@ export class HomeComponent {
   constructor(private router: Router) {};
 
   navigateTo(route: string) {
-    debugger;
     this.router.navigate([route]);
   }
 }
