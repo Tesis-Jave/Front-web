@@ -13,17 +13,21 @@ body {
     background-color: white;
     height: 100vh;
     width: 70%;
-    padding: 100px;
+    padding: 60px;
   }
 
-.left-side {
+  .left-side {
     flex: 1;
     width: 30%;
     height: 100vh;
     background-color: #821F1F;
-    padding: 100px;
     color: white;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px; 
+    padding-bottom: 100px;
 }
 
 .button-container {
@@ -31,11 +35,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80%;
+    height: 95%;
 
   }
   .button-container button {
-    margin-bottom: 40px; /* Espacio vertical entre los botones */
+    margin-bottom: 100px; /* Espacio vertical entre los botones */
     width: 150px;
     background-color: #d9d9d9;
     color: #821f1f;
@@ -43,24 +47,27 @@ body {
 
 
   .accept-button {
-    width: 100%;
+    width: 10%;
     height: 5%; /* Espacio para el botón "Aceptar" */
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
     box-sizing: border-box;
-    margin-top: -70px;
+    text-align: center;
+   
   }
 
   .top-box {
     width: 100%;
-    height: 38%;
+    height: 35%;
     background-color: white; /* Color de fondo del recuadro superior */
-    padding: 20px;
+    padding: 2px;
     box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
-    overflow: auto; /* Agrega desplazamiento si el contenido es demasiado largo */
-    margin-bottom: 30px; /* Espacio entre top-box y main-content */
+    /* overflow: auto ; scroll bar */
+    margin-bottom: 15px; /* Espacio entre top-box y main-content */
+    border-radius: 10px; /* Ajusta el valor de border-radius según tus preferencias */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Añade una sombra para dar más estilo (opcional) */
   }
   
   .main-content {
@@ -69,13 +76,184 @@ body {
     background-color: #f0f0f0; /* Color de fondo del contenido principal */
     padding: 20px;
     box-sizing: border-box;
-  }
+    border-radius: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
+    }
 
+  .javepuntos-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /*300px*/
+}
 
+.javepuntos-image img {
+
+    max-width: 100%;
+    /* width: 500px; 
+    height: 200px;   */
+    /*border-radius: 10px;  Ajusta el valor de border-radius según tus preferencias 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);  Añade una sombra para dar más estilo (opcional) */
+}
 
 
 
 
   /*-----------------------------------------------------*/
 
- 
+  /* formulario */
+
+  .data-form-layout {
+    padding: 20px 7px;
+}
+
+.data-form-layout form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    column-gap: 10px; /*50*/
+    row-gap: 0px; /*20*/
+}
+
+.data-form-layout .input-container {
+    flex-basis: 23%;
+}
+
+.data-form-layout form label {
+    display: flex;
+    flex-flow: column nowrap;
+    /* font-size: 1.25em; */
+    color: #555555;
+}
+
+.data-form-layout form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #CFCFCF;
+    /* font-size: 1.4em; */
+}
+
+.data-form-layout form input::placeholder {
+    color: #CFCFCF;
+}
+
+.data-form-layout .button-container {
+    flex-basis: 27%;
+    justify-self: flex-end;
+}
+
+.data-form-layout .button-container button {
+    padding: 10px;
+    width: 50%;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.5em;
+    color: white;
+    font-weight: bold;
+}
+
+.data-form-layout .input-container select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #CFCFCF;
+    /* font-size: 1.4em; */
+    appearance: none;
+    background-color: white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23CFCFCF' d='M7.41,8.59L12,13.17l4.59-4.58L18,10l-6,6l-6-6L7.41,8.59z'/%3E%3C/svg%3E");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    color: #555555;
+}
+
+.data-form-layout .input-container select:focus {
+    outline: none;
+    color: #000;
+}
+
+/* tabla  */
+
+.data-container {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #CFCFCF;
+}
+
+.data-container .labels-container {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 15px 30px;
+    justify-content: space-between;
+    border-bottom: 1px solid #CFCFCF;
+    column-gap: 6px;
+    background-color: #F8F8F8;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.data-container .labels-container .column-info .label {
+    font-size: 1.3em;
+    font-weight: 300;
+    text-align: center;
+    min-width: 100px;
+    color: #7a7a7a;
+}
+
+.data-container .labels-container .last-label {
+    min-width: 150px;
+}
+
+.data-container .info-container {
+    border-bottom: 1px solid #eeeeee;
+}
+
+.data-container .info-container .row-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 10px 30px;
+    column-gap: 10px;
+}
+
+.data-container .info-container .row-container .parameter-info {
+    font-size: 1.3em;
+    font-weight: 300;
+    text-align: center;
+    max-width: 150px;
+    min-width: 50px;
+
+    &:first-child {
+        max-width: 50px;
+    }
+}
+
+.data-container .info-container .row-container .button-layout {
+    column-gap: 5px;
+    min-width: 150px;
+}
+
+.data-container .info-container .row-container .button-layout .button {
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: none;
+    color: white;
+    transition: 300ms;
+
+    &:hover {
+        opacity: 90%;
+        transform: scale(1.05);
+    }
+}
+
+.data-container .info-container .row-container .button-layout .edit {
+    background-color: #066699;
+}
+
+.data-container .info-container .row-container .button-layout .delete {
+    background-color: #FB3D3D;
+}
+
+.data-container .last-row {
+    border: none !important;
+}
