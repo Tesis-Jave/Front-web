@@ -1,1 +1,42 @@
-<p>home works!</p>
+<header class="headerdiv">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="menu.png">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" type="button">Action</button>
+          <button class="dropdown-item" type="button">Another action</button>
+          <button class="dropdown-item" type="button">Something else here</button>
+        </div>
+      </div>
+</header>
+
+<body>
+    <div class="CuadroAfuera">
+        <div class="CuadroAdentro">
+            <button class="boton" (click)="navigateTo('premios')">
+                Premios
+            </button>
+            <br>
+            <button class="boton" (click)="navigateTo('cafeterias')">
+                Cafeterías
+            </button>
+            <br>
+            <button class="boton" (click)="navigateTo('productos')">
+                Productos
+            </button>
+            <br>
+            <button class="boton" (click)="navigateTo('login')">
+                Salir
+            </button>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <div class="footerdiv">
+        <img src="back">
+        <img src="casita">
+        <img src="hombrecito">
+    </div>
+</footer>
