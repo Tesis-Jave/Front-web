@@ -1,46 +1,53 @@
 <body>
   <div class="left-side">
-    <div class="left-side">
-        <div class="button-container">
-          <button type="button" class="btn btn-primary btn-lg">
-            Modificar
-          </button>
-          <!-- Boton de creacion y cancelacion -->
-          <div>
-            <div *ngIf="!createLayoutActivate">
-              <button
-                type="button"
-                (click)="launchCreateFormLayout()"
-                class="btn btn-primary btn-lg"
-              >
-                Crear
-              </button>
-            </div>
-            <div *ngIf="createLayoutActivate || updateLayoutActivate">
-              <button
-                class="btn btn-primary btn-lg"
-                (click)="closeInputFormLayout()"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-          <button type="button" class="btn btn-primary btn-lg">Eliminar</button>
-        </div>
+    <div class="jave-logo">
+      <img src="\assets\images\JAVEPUNTOSB.png" alt="" />
+    </div>
+
+    <div class="button-container">
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('premios')"
+      >
+        Premios
+      </button>
+      <!-- Boton de creacion y cancelacion -->
+
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('cafeterias')"
+      >
+        Cafeterias
+      </button>
+    </div>
+
+    <div>
+      <button
+        class="btn btn-lg goback-button text-center with-icon"
+        (click)="navigateTo('home')"
+      >
+        <span><i class="fa fa-arrow-left fa-3x"></i></span>
+      </button>
     </div>
   </div>
   <div class="right-side">
-
+    <!-- logo viejo -->
+    <!-- <img src="\assets\images\JavePuntosL.png" alt="" /> -->
+    <!-- <img src="\assets\images\desingProposal.png" alt="" /> -->
     <div class="top-box">
       <!-- Formulario -->
-      <div *ngIf="!createLayoutActivate" class="javepuntos-image">
-        <img src="\assets\images\JavePuntosL.png" alt="" />
-      </div>
-      <div class="data-form-layout" *ngIf="createLayoutActivate || updateLayoutActivate">
+
+      <!-- <div *ngIf="!createLayoutActivate" class="javepuntos-image">
+        <img src="\assets\images\JAVEPUNTOS.png" alt="" /> -->
+      <!-- <img src="\assets\images\desingProposal.png" alt="" /> -->
+      <!-- </div> -->
+
+      <div class="data-form-layout">
         <!-- intercambiar -->
         <!-- <div class="data-form-layout">  -->
         <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
-
           <div class="input-container">
             <label>Codigó de articulo</label>
             <input
@@ -58,7 +65,6 @@
               formControlName="descripcion"
               placeholder="Ingrese la descripcion"
               [ngModel]="productoInfo.descripcion"
-
             />
           </div>
           <div class="input-container">
@@ -68,11 +74,10 @@
               formControlName="departamento"
               placeholder="Ingrese el departamento"
               [ngModel]="productoInfo.dpto"
-          
             />
           </div>
           <div class="input-container">
-            <label>Seccion</label>
+            <label>Sección</label>
             <input
               type="number"
               formControlName="price"
@@ -80,7 +85,7 @@
               [ngModel]="productoInfo.seccion"
             />
           </div>
-          
+
           <div class="input-container">
             <label>Referencia proveedor</label>
             <input
@@ -90,7 +95,6 @@
               [ngModel]="productoInfo.refProveedor"
             />
           </div>
-
           <div class="input-container">
             <label>Unidad de medición</label>
             <select
@@ -106,7 +110,6 @@
               <option value="ml">ML</option>
             </select>
           </div>
-
           <div class="input-container">
             <label>Valor de medida</label>
             <input
@@ -116,7 +119,6 @@
               [ngModel]="productoInfo.medidaReferencia"
             />
           </div>
-
           <div class="input-container">
             <label>Tipo de articulo</label>
             <input
@@ -126,19 +128,22 @@
               [ngModel]="productoInfo.tipoArticulo"
             />
           </div>
-
           <div class="accept-button">
             <button type="button" class="btn btn-success custom-button">
               Aceptar
             </button>
           </div>
         </form>
+      </div>
+    </div>
 
+    <div class="middle-box">
+      <div class="search-bar">
+        <input class="form-control" type="text" placeholder="Busqueda" />
       </div>
     </div>
 
     <div class="main-content">
-
       <div class="data-container">
         <div class="labels-container">
           <div
@@ -149,17 +154,16 @@
             <p class="label">{{ category }}</p>
           </div>
         </div>
-      
+
         <!-- <div
           class="info-container"
           *ngFor="let service of serviceList; let last = last"
           [ngClass]="{ 'last-row': last }"
         > -->
-        <div
-        class="info-container">
+        <div class="info-container">
           <div class="row-container">
             <!-- <p class="parameter-info">{{ service.id }}</p> -->
-            <p class="parameter-info">hola</p>
+            <p class="parameter-info">productos</p>
             <div class="button-layout">
               <!-- <button class="edit button" (click)="selectedService(service)">
                 Modificar
@@ -167,17 +171,12 @@
               <button class="delete button" (click)="deleteService(service.id)">
                 Eliminar
               </button> -->
-              <button class="edit button">
-                Modificar
-              </button>
-              <button class="delete button">
-                Eliminar
-              </button>
+              <button class="edit button">Modificar</button>
+              <button class="delete button">Eliminar</button>
             </div>
           </div>
         </div>
-    </div>
-
+      </div>
     </div>
   </div>
 </body>
