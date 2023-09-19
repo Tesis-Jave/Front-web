@@ -1,32 +1,29 @@
-<header class="headerdiv">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="assets\images\menu.png" class="imagenMenu">
+<header >
+    <div class="headerdiv">
+        <button class="footer-buttons">
+            <img src="assets\images\menu.png">
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" type="button">Action</button>
-          <button class="dropdown-item" type="button">Another action</button>
-          <button class="dropdown-item" type="button">Something else here</button>
-        </div>
-      </div>
+        <h1 class="H1Menu">Menu principal</h1>
+    </div>
+
 </header>
 
 <body>
     <div class="CuadroAfuera">
         <div class="CuadroAdentro">
-            <button class="boton" (click)="navigateTo('premios')">
+            <button class="menu-buttons" (click)="navigateTo('premios')">
                 Premios
             </button>
             <br>
-            <button class="boton" (click)="navigateTo('cafeterias')">
+            <button class="menu-buttons" (click)="navigateTo('cafeterias')">
                 Cafeterías
             </button>
             <br>
-            <button class="boton" (click)="navigateTo('productos')">
+            <button class="menu-buttons" (click)="navigateTo('productos')">
                 Productos
             </button>
             <br>
-            <button class="boton" (click)="navigateTo('login')">
+            <button class="menu-buttons" (click)="navigateTo('login')">
                 Salir
             </button>
         </div>
@@ -35,8 +32,8 @@
 
 <footer>
     <div class="footerdiv">
-        <img src="back">
-        <img src="casita">
-        <img src="hombrecito">
+        <img src="assets\images\leftArrowN.png" class="footer-buttons">
+        <img src="assets\images\home.png" class="footer-buttons">
+        <img src="assets\images\user_icon.png" class="footer-buttons">
     </div>
 </footer>

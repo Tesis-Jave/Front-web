@@ -19,35 +19,55 @@
   box-sizing: border-box;
 }
 
-.boton{
+.menu-buttons{
   text-align: center;
-  display: block;
-  font-size: 1.33em;
   font-family: STIX Two Text;
   width: 10em;
   margin: 5% auto;
   padding: 0.3em 2em;
-  border-radius: 50px;
-  border-color: #000000;
+  border: 0.1em solid #000000;
   background-color: #D9D9D9;
   color: #821F1F;
-  box-sizing: border-box;
 }
 
 .headerdiv{
   background-color: #821F1F;
-  border-radius: 0% 0% 60% 60%;
   height: 7em;
-  box-sizing: border-box;
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos en el contenedor */
+  text-align: center; /* Centra horizontalmente el contenido */
+}
+
+.H1Menu {
+  font-size: 4em; /* Puedes ajustar el tamaño de fuente según tus preferencias */
+  color: #D9D9D9; /* Cambia el color del texto si es necesario */
+  font-family: STIX Two Text;
+  padding: 0;
 }
 
 .footerdiv{
   background-color: #821F1F;
   height: 100%;
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos alrededor del contenedor */
+  align-items: center;  
 }
 
-.imagenMenu{
-  width: 1em;
-  height: 1em;
-  object-fit:scale-down;
+.footer-buttons {
+  text-align: center;
+  font-family: STIX Two Text;
+  width: 10em;
+  padding: 0.3em 2em;
+  color: #821F1F;
+  margin: 0; /* Elimina el margen para que los botones estén igualmente espaciados */
+  background: none;
+  border: none;
+}
+
+
+.headerdiv .footer-buttons img {
+  height: 5em; /* Ajusta el alto deseado, por ejemplo, 1em */
+  object-fit: contain; /* Esto mantiene la relación de aspecto y ajusta la imagen dentro del botón */
+  background: none;
+  border: none;
 }
