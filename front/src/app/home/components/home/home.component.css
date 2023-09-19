@@ -37,11 +37,17 @@
 .headerdiv{
   background-color: #821F1F;
   border-radius: 0% 0% 60% 60%;
-  height: 5em;
-  margin: -1.82%;
+  height: 7em;
+  box-sizing: border-box;
 }
 
 .footerdiv{
   background-color: #821F1F;
   height: 100%;
+}
+
+.imagenMenu{
+  width: 1em;
+  height: 1em;
+  object-fit:scale-down;
 }
