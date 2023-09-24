@@ -12,6 +12,7 @@ import { FooterComponent } from './login/footer/footer.component';
 import { DashboardComponent } from './login/dashboard/dashboard.component';
 import { PremiosComponent } from './components/premios/premios/premios.component';
 import { CafeteriasComponent } from './components/cafeterias/cafeterias/cafeterias.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { CafeteriasComponent } from './components/cafeterias/cafeterias/cafeteri
     PremiosComponent,
     CafeteriasComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

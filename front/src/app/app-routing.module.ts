@@ -5,6 +5,7 @@ import { ProductoComponent } from './components/productos/productos.component';
 import { LoginComponent } from './login/login.component';
 import { PremiosComponent } from './components/premios/premios/premios.component';
 import { CafeteriasComponent } from './components/cafeterias/cafeterias/cafeterias.component';
+import { DashboardComponent } from './login/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
