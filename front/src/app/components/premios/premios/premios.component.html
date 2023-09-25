@@ -1,0 +1,136 @@
+<body>
+  <div class="left-side">
+    <div class="jave-logo">
+      <img src="\assets\images\JAVEPUNTOSB.png" alt="" />
+    </div>
+
+    <div class="button-container">
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('productos')"
+      >
+        Productos
+      </button>
+
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('cafeterias')"
+      >
+        Cafeterias
+      </button>
+    </div>
+
+    <div>
+      <button
+        class="btn btn-lg goback-button text-center with-icon"
+        (click)="navigateTo('home')"
+      >
+        <span><i class="fa fa-arrow-left fa-3x"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="right-side">
+    <div class="top-box">
+      <div class="data-form-layout">
+        <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
+          <div class="input-container">
+            <label>Código id del premio</label>
+            <input
+              type="number"
+              formControlName="id"
+              placeholder="Ingreseel codigo del premio"
+              [ngModel]="premioInfo.id"
+            />
+          </div>
+
+          <div class="input-container">
+            <label>Id(s) de Articulo</label>
+            <input
+              type="number"
+              formControlName="articuloId"
+              placeholder="Ingrese el id del articulo"
+              [ngModel]="premioInfo.articuloId"
+            />
+          </div>
+          <div class="input-container">
+            <label>Precio</label>
+            <input
+              type="number"
+              formControlName="precioNuevo"
+              placeholder="Ingrese el nuevo precio del articulo"
+              [ngModel]="premioInfo.precioNuevo"
+            />
+          </div>
+          <div class="input-container">
+            <label>Fecha inicio de promoción</label>
+            <input
+              type="date"
+              formControlName="fechaInicio"
+              placeholder="Ingrese la fecha de inicio para la promoción"
+              [ngModel]="premioInfo.fechaInicio"
+            />
+          </div>
+          <div class="input-container">
+            <label>Fecha fin de promoción</label>
+            <input
+              type="date"
+              formControlName="fechaFin"
+              placeholder="Ingrese la fecha de finalización para la promoción"
+              [ngModel]="premioInfo.fechaFin"
+            />
+          </div>
+         
+          <div class="accept-button">
+            <button type="button" class="btn btn-success custom-button">
+              Aceptar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="middle-box">
+      <div class="search-bar">
+        <input class="form-control" type="text" placeholder="Busqueda" />
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="data-container">
+        <div class="labels-container">
+          <div
+            class="column-info"
+            *ngFor="let category of labels; let last = last"
+            [ngClass]="{ 'last-label': last }"
+          >
+            <p class="label">{{ category }}</p>
+          </div>
+        </div>
+
+        <!-- <div
+          class="info-container"
+          *ngFor="let service of serviceList; let last = last"
+          [ngClass]="{ 'last-row': last }"
+        > -->
+        <div class="info-container">
+          <div class="row-container">
+            <!-- <p class="parameter-info">{{ service.id }}</p> -->
+            <p class="parameter-info">productos</p>
+            <div class="button-layout">
+              <!-- <button class="edit button" (click)="selectedService(service)">
+                Modificar
+              </button>
+              <button class="delete button" (click)="deleteService(service.id)">
+                Eliminar
+              </button> -->
+              <button class="edit button">Modificar</button>
+              <button class="delete button">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
