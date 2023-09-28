@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,7 @@ export class DashboardComponent {
       this.failed = false;
       this.authenticated = 1;
       this.userName = this.usuario;
-      this.navigateTo('home');
+      this.navigateTo('productos');
     } else {
       this.failed = true;
       this.authenticated = 0;
