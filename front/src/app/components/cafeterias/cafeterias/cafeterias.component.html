@@ -1,13 +1,136 @@
-<div class="form-row">
-
-    <div class="form-group col-md-8">
-      <label for="DESCRIPCION">Descripción</label>
-      <input type="text" class="form-control" id="DESCRIPCION" />
+<body>
+  <div class="left-side">
+    <div class="jave-logo">
+      <img src="\assets\images\JAVEPUNTOSB.png" alt="" />
     </div>
 
-    <div class="form-group col-md-4">
-      <label for="CODARTICULO">Código de articulo</label>
-      <input type="number" class="form-control" id="CODARTICULO" />
+    <div class="button-container">
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('productos')"
+      >
+        Productos
+      </button>
+
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('premios')"
+      >
+        Premios
+      </button>
     </div>
 
+    <div>
+      <button
+        class="btn btn-lg goback-button text-center with-icon"
+        (click)="navigateTo('home')"
+      >
+        <span><i class="fa fa-arrow-left fa-3x"></i></span>
+      </button>
+    </div>
   </div>
+  <div class="right-side">
+    <div class="top-box">
+      <div class="data-form-layout">
+        <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
+          <div class="input-container">
+            <label>Código id de la cafeteria</label>
+            <input
+              type="number"
+              formControlName="id"
+              placeholder="Ingreseel codigo del premio"
+              [ngModel]="cafeteriaInfo.id_cafeteria"
+            />
+          </div>
+
+          <div class="input-container">
+            <label>Descripcion</label>
+            <input
+              type="text"
+              formControlName="descripcion"
+              placeholder="Ingrese la descripcion de la cafeteria"
+              [ngModel]="cafeteriaInfo.descripcion"
+            />
+          </div>
+          <div class="input-container">
+            <label>Ubicacion</label>
+            <input
+              type="text"
+              formControlName="ubicacion"
+              placeholder="Ingrese la ubicación"
+              [ngModel]="cafeteriaInfo.ubicacion"
+            />
+          </div>
+          <div class="input-container">
+            <label>Id tarifa</label>
+            <input
+              type="number"
+              formControlName="id_tarifa"
+              placeholder="Ingrese el id de la tarifa"
+              [ngModel]="cafeteriaInfo.id_tarifa"
+            />
+          </div>
+          <div class="input-container">
+            <label>Tipo de cafeteria</label>
+            <input
+              type="text"
+              formControlName="tipo"
+              placeholder="Ingrese el tipo"
+              [ngModel]="cafeteriaInfo.tipo"
+            />
+          </div>
+         
+          <div class="accept-button">
+            <button type="button" class="btn btn-success custom-button">
+              Aceptar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="middle-box">
+      <div class="search-bar">
+        <input class="form-control" type="text" placeholder="Busqueda" />
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="data-container">
+        <div class="labels-container">
+          <div
+            class="column-info"
+            *ngFor="let category of labels; let last = last"
+            [ngClass]="{ 'last-label': last }"
+          >
+            <p class="label">{{ category }}</p>
+          </div>
+        </div>
+
+        <!-- <div
+          class="info-container"
+          *ngFor="let service of serviceList; let last = last"
+          [ngClass]="{ 'last-row': last }"
+        > -->
+        <div class="info-container">
+          <div class="row-container">
+            <!-- <p class="parameter-info">{{ service.id }}</p> -->
+            <p class="parameter-info">productos</p>
+            <div class="button-layout">
+              <!-- <button class="edit button" (click)="selectedService(service)">
+                Modificar
+              </button>
+              <button class="delete button" (click)="deleteService(service.id)">
+                Eliminar
+              </button> -->
+              <button class="edit button">Modificar</button>
+              <button class="delete button">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
