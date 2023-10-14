@@ -21,11 +21,7 @@
       >
         Cafeterias
       </button>
-      <button
-        type="button"
-        class="menu-buttons"
-        (click)="navigateTo('login')"
-      >
+      <button type="button" class="menu-buttons" (click)="navigateTo('login')">
         Cerrar sesión
       </button>
     </div>
@@ -38,23 +34,10 @@
         <span><i class="fa fa-arrow-left fa-3x"></i></span>
       </button>
     </div>
-
   </div>
   <div class="right-side">
-    <!-- logo viejo -->
-    <!-- <img src="\assets\images\JavePuntosL.png" alt="" /> -->
-    <!-- <img src="\assets\images\desingProposal.png" alt="" /> -->
     <div class="top-box">
-      <!-- Formulario -->
-
-      <!-- <div *ngIf="!createLayoutActivate" class="javepuntos-image">
-        <img src="\assets\images\JAVEPUNTOS.png" alt="" /> -->
-      <!-- <img src="\assets\images\desingProposal.png" alt="" /> -->
-      <!-- </div> -->
-
       <div class="data-form-layout">
-        <!-- intercambiar -->
-        <!-- <div class="data-form-layout">  -->
         <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
           <div class="input-container">
             <label>Codigó de articulo</label>
@@ -88,7 +71,7 @@
             <label>Sección</label>
             <input
               type="number"
-              formControlName="price"
+              formControlName="seccion"
               placeholder="Ingrese la seccion"
               [ngModel]="productoInfo.seccion"
             />
@@ -163,24 +146,33 @@
           </div>
         </div>
 
-        <!-- <div
+        <div
           class="info-container"
-          *ngFor="let service of serviceList; let last = last"
+          *ngFor="let producto of productosList; let last = last"
           [ngClass]="{ 'last-row': last }"
-        > -->
-        <div class="info-container">
+        >
           <div class="row-container">
-            <!-- <p class="parameter-info">{{ service.id }}</p> -->
-            <p class="parameter-info">productos</p>
+            <!-- <p class="parameter-info">productos</p> -->
+            <p class="parameter-info">{{ producto.codArticulo }}</p>
+            <p class="parameter-info">{{ producto.descripcion }}</p>
+            <p class="parameter-info">{{ producto.dpto }}</p>
+            <p class="parameter-info">{{ producto.seccion }}</p>
+            <p class="parameter-info">{{ producto.refProveedor }}</p>
+            <p class="parameter-info">{{ producto.unidadMedida }}</p>
+            <p class="parameter-info">{{ producto.medidaReferencia }}</p>
+            <p class="parameter-info">{{ producto.tipoArticulo }}</p>
             <div class="button-layout">
-              <!-- <button class="edit button" (click)="selectedService(service)">
+              <button class="edit button" (click)="selectedProduct(producto)">
                 Modificar
               </button>
-              <button class="delete button" (click)="deleteService(service.id)">
+              <button
+                class="delete button"
+                (click)="deleteProduct(producto.codArticulo)"
+              >
                 Eliminar
-              </button> -->
-              <button class="edit button">Modificar</button>
-              <button class="delete button">Eliminar</button>
+              </button>
+              <!-- <button class="edit button">Modificar</button>
+              <button class="delete button">Eliminar</button> -->
             </div>
           </div>
         </div>
