@@ -24,30 +24,33 @@ export class ProductoComponent {
 
   labels: string[] = ['Id', 'Nombre', 'Precio'];
   productosList: Articulo[] = [];
-  productoInfo: Articulo = new Articulo(0, '', 0, 0, '', '', 0, '');
+  productoInfo: Articulo = new Articulo(0, '', 0, 0, '', '', 0, '',0,0);
 
   updateProductState: boolean = false;
 
   createProductform = this.formBuilder.group({
-    id: [''],
+    id_articulo: [''],
     descripcion: [''],
-    departamento: [''],
-    seccion: [''],
-    refProveedor: [''],
-    unidadMedida: [''],
-    medidaReferencia: [''],
-    tipoArticulo: [''],
+    id_dpto: [''],
+    id_seccion: [''],
+    proveedor: [''],
+    unidadmedida: [''],
+    medidareferencia: [''],
+    tipoarticulo: [''],
+    stock:[''],
+    precio:[''],
   });
 
   ngOnInit(): void {
     this.labels = Articulo.getProperties();
     this.porductService.getAllproducto().subscribe((data) => {
       this.productosList = data;
+      console.log(this.productosList);
     });
   }
 
   closeInputFormLayout() {
-    this.productoInfo = new Articulo(0, '', 0, 0, '', '', 0, '');
+    this.productoInfo = new Articulo(0, '', 0, 0, '', '', 0, '',0,0);
     this.createProductform.reset();
   }
 
@@ -58,24 +61,28 @@ export class ProductoComponent {
   onSubmit() {
 
     let descripcion: string = '' + this.createProductform.value.descripcion;
-    let seccion: number = parseInt('' + this.createProductform.value.seccion);
-    let dpto: number = parseInt('' + this.createProductform.value.departamento);
-    let refProveedor: string = '' + this.createProductform.value.refProveedor;
-    let unidadMedida: string = '' + this.createProductform.value.unidadMedida;
-    let medidaReferencia: number = parseInt('' + this.createProductform.value.medidaReferencia);
-    let tipoArticulo: string = '' + this.createProductform.value.tipoArticulo;
+    let id_seccion: number = parseInt('' + this.createProductform.value.id_seccion);
+    let id_dpto: number = parseInt('' + this.createProductform.value.id_dpto);
+    let proveedor: string = '' + this.createProductform.value.proveedor;
+    let unidadmedida: string = '' + this.createProductform.value.unidadmedida;
+    let medidareferencia: number = parseInt('' + this.createProductform.value.medidareferencia);
+    let tipoarticulo: string = '' + this.createProductform.value.tipoarticulo;
+    let stock:number= parseInt(''+this.createProductform.value.stock );
+    let precio:number=parseFloat(''+this.createProductform.value.precio);
     //console.log('codigo articulo:' +codArticulo);
 
     if (this.updateProductState) {
       let product = new Articulo(
-        this.productoInfo.codArticulo,
+        this.productoInfo.id_articulo,
         descripcion,
-        dpto,
-        seccion,
-        refProveedor,
-        unidadMedida,
-        medidaReferencia,
-        tipoArticulo
+        id_dpto,
+        id_seccion,
+        proveedor,
+        unidadmedida,
+        medidareferencia,
+        tipoarticulo,
+        stock,
+        precio
       );
       //llamar metodo de update
     } else {

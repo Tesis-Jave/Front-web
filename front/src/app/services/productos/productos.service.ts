@@ -33,7 +33,7 @@ export class ProductosService {
   }
 
   updateProducto(producto: Articulo): Observable<Articulo>{
-    return this.http.put<Articulo>(this.url+'/'+producto.codArticulo,producto,this.httpOptions);
+    return this.http.put<Articulo>(this.url+'/'+producto.id_articulo,producto,this.httpOptions);
   }
 
 }

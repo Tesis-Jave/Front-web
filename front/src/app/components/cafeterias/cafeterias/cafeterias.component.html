@@ -41,7 +41,7 @@
   <div class="right-side">
     <div class="top-box">
       <div class="data-form-layout">
-        <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
+        <form [formGroup]="createCafeteriaform" (ngsubmit)="onSubmit()">
           <div class="input-container">
             <label>Código id de la cafeteria</label>
             <input
@@ -62,12 +62,21 @@
             />
           </div>
           <div class="input-container">
-            <label>Ubicacion</label>
+            <label>Longitud</label>
             <input
-              type="text"
-              formControlName="ubicacion"
+              type="number"
+              formControlName="longitud"
               placeholder="Ingrese la ubicación"
-              [ngModel]="cafeteriaInfo.ubicacion"
+              [ngModel]="cafeteriaInfo.longitud"
+            />
+          </div>
+          <div class="input-container">
+            <label>Latitud</label>
+            <input
+              type="number"
+              formControlName="latitud"
+              placeholder="Ingrese la ubicación"
+              [ngModel]="cafeteriaInfo.latitud"
             />
           </div>
           <div class="input-container">
@@ -116,24 +125,26 @@
           </div>
         </div>
 
-        <!-- <div
+        <div
           class="info-container"
-          *ngFor="let service of serviceList; let last = last"
+          *ngFor="let cafeteria of cafeteriaList; let last = last"
           [ngClass]="{ 'last-row': last }"
-        > -->
-        <div class="info-container">
+        > 
           <div class="row-container">
             <!-- <p class="parameter-info">{{ service.id }}</p> -->
-            <p class="parameter-info">productos</p>
+            <p class="parameter-info">{{cafeteria.id_cafeteria}}</p>
+            <p class="parameter-info">{{cafeteria.descripcion}}</p>
+            <p class="parameter-info">{{cafeteria.longitud}}</p>
+            <p class="parameter-info">{{cafeteria.latitud}}</p>
+            <p class="parameter-info">{{cafeteria.id_tarifa}}</p>
+            <p class="parameter-info">{{cafeteria.tipo}}</p>
             <div class="button-layout">
-              <!-- <button class="edit button" (click)="selectedService(service)">
+              <button class="edit button" (click)="selectedCafeteria(cafeteria)">
                 Modificar
               </button>
-              <button class="delete button" (click)="deleteService(service.id)">
+              <button class="delete button" (click)="deleteCafeteria(cafeteria.id_cafeteria)">
                 Eliminar
-              </button> -->
-              <button class="edit button">Modificar</button>
-              <button class="delete button">Eliminar</button>
+              </button> 
             </div>
           </div>
         </div>

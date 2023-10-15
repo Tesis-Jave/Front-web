@@ -43,9 +43,9 @@
             <label>Codigó de articulo</label>
             <input
               type="number"
-              formControlName="id"
+              formControlName="id_articulo"
               placeholder="Ingreseel codigo del articulo"
-              [ngModel]="productoInfo.codArticulo"
+              [ngModel]="productoInfo.id_articulo"
             />
           </div>
 
@@ -62,18 +62,18 @@
             <label>Departamento</label>
             <input
               type="number"
-              formControlName="departamento"
+              formControlName="id_dpto"
               placeholder="Ingrese el departamento"
-              [ngModel]="productoInfo.dpto"
+              [ngModel]="productoInfo.id_dpto"
             />
           </div>
           <div class="input-container">
             <label>Sección</label>
             <input
               type="number"
-              formControlName="seccion"
+              formControlName="id_seccion"
               placeholder="Ingrese la seccion"
-              [ngModel]="productoInfo.seccion"
+              [ngModel]="productoInfo.id_seccion"
             />
           </div>
 
@@ -81,23 +81,23 @@
             <label>Referencia proveedor</label>
             <input
               type="text"
-              formControlName="refProveedor"
+              formControlName="proveedor"
               placeholder="Ingrese la referencia del proovedor"
-              [ngModel]="productoInfo.refProveedor"
+              [ngModel]="productoInfo.proveedor"
             />
           </div>
           <div class="input-container">
             <label>Unidad de medición</label>
             <select
-              formControlName="unidadMedida"
+              formControlName="unidadmedida"
               placeholder="Ej: gramos"
-              [ngModel]="productoInfo.unidadMedida"
+              [ngModel]="productoInfo.unidadmedida"
             >
               <option value="" disabled selected>
                 Seleccione el Tipo de unidad de medicion
               </option>
               <option value="">-</option>
-              <option value="g">Gramos</option>
+              <option value="gr">Gramos</option>
               <option value="ml">ML</option>
             </select>
           </div>
@@ -105,18 +105,36 @@
             <label>Valor de medida</label>
             <input
               type="number"
-              formControlName="medidaReferencia"
+              formControlName="medidareferencia"
               placeholder="Ingrese el valor de la medida"
-              [ngModel]="productoInfo.medidaReferencia"
+              [ngModel]="productoInfo.medidareferencia"
             />
           </div>
           <div class="input-container">
             <label>Tipo de articulo</label>
             <input
               type="text"
-              formControlName="tipoArticulo"
+              formControlName="tipoarticulo"
               placeholder="Ingrese el tipo de articulo"
-              [ngModel]="productoInfo.tipoArticulo"
+              [ngModel]="productoInfo.tipoarticulo"
+            />
+          </div>
+          <div class="input-container">
+            <label>Tipo de articulo</label>
+            <input
+              type="number"
+              formControlName="stock"
+              placeholder="Ingrese el stock del articulo"
+              [ngModel]="productoInfo.stock"
+            />
+          </div>
+          <div class="input-container">
+            <label>Tipo de articulo</label>
+            <input
+              type="number"
+              formControlName="precio"
+              placeholder="Ingrese el tipo de articulo"
+              [ngModel]="productoInfo.precio"
             />
           </div>
           <div class="accept-button">
@@ -153,21 +171,23 @@
         >
           <div class="row-container">
             <!-- <p class="parameter-info">productos</p> -->
-            <p class="parameter-info">{{ producto.codArticulo }}</p>
+            <p class="parameter-info">{{ producto.id_articulo }}</p>
             <p class="parameter-info">{{ producto.descripcion }}</p>
-            <p class="parameter-info">{{ producto.dpto }}</p>
-            <p class="parameter-info">{{ producto.seccion }}</p>
-            <p class="parameter-info">{{ producto.refProveedor }}</p>
-            <p class="parameter-info">{{ producto.unidadMedida }}</p>
-            <p class="parameter-info">{{ producto.medidaReferencia }}</p>
-            <p class="parameter-info">{{ producto.tipoArticulo }}</p>
+            <p class="parameter-info">{{ producto.id_dpto }}</p>
+            <p class="parameter-info">{{ producto.id_seccion }}</p>
+            <p class="parameter-info">{{ producto.proveedor }}</p>
+            <p class="parameter-info">{{ producto.unidadmedida }}</p>
+            <p class="parameter-info">{{ producto.medidareferencia }}</p>
+            <p class="parameter-info">{{ producto.tipoarticulo }}</p>
+            <p class="parameter-info">{{ producto.stock }}</p>
+            <p class="parameter-info">{{ producto.precio }}</p>
             <div class="button-layout">
               <button class="edit button" (click)="selectedProduct(producto)">
                 Modificar
               </button>
               <button
                 class="delete button"
-                (click)="deleteProduct(producto.codArticulo)"
+                (click)="deleteProduct(producto.id_articulo)"
               >
                 Eliminar
               </button>

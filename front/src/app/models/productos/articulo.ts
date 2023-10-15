@@ -13,14 +13,17 @@
 export class Articulo {
 
     constructor(
-        public codArticulo: number,
+        public id_articulo: number,
         public descripcion: string,
-        public dpto: number,
-        public seccion: number,
-        public refProveedor: string,
-        public unidadMedida: string,
-        public medidaReferencia: number,
-        public tipoArticulo: string,
+        public id_dpto: number,
+        public id_seccion: number,
+        public proveedor: string,
+        public unidadmedida: string,
+        public medidareferencia: number,
+        public tipoarticulo: string,
+        public stock: number,
+        public precio:number,
+
     ){}
 
     //Metodo describe: Array<string>
@@ -35,7 +38,9 @@ export class Articulo {
             'Referencia Proveedor',
             'Unidad Medida',
             'Medida Referencia',
-            'Tipo Articulo'
+            'Tipo Articulo',
+            'stock',
+            'precio'
         ]
         return articulo;
     }
