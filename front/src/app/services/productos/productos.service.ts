@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Articulo } from 'src/app/models/productos/articulo';
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,31 +10,34 @@ import { Articulo } from 'src/app/models/productos/articulo';
 export class ProductosService {
 
   url = 'http://localhost:3000/articulos'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private cookies:CookieService) { }
+
 
   private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer '+localStorage.getItem('token')
-    })
+    headers: new HttpHeaders().set('Authorization',this.cookies.get('token'))
   };
 
   getAllproducto(): Observable<Articulo[]>{
-    return this.http.get<Articulo[]>(this.url,this.httpOptions);
+    const headers = new HttpHeaders().set('Authorization',"Bearer "+this.cookies.get('token'));
+    return this.http.get<Articulo[]>(this.url,{headers});
   }
 
   deleteProducto(id: number): Observable<any>{
-    return this.http.delete<any>(this.url+ '/' + id);
+    const headers = new HttpHeaders().set('Authorization',"Bearer "+this.cookies.get('token'));
+    return this.http.delete<any>(this.url+ '/' + id,{headers});
   }
   getProductoById(id: number){
-    return this.http.get<Articulo>(this.url+'/'+id,this.httpOptions);
+    const headers = new HttpHeaders().set('Authorization',"Bearer "+this.cookies.get('token'));
+    return this.http.get<Articulo>(this.url+'/'+id,{headers});
   }
   createProducto(producto: Articulo): Observable<Articulo>{
-    return this.http.post<Articulo>(this.url,producto,this.httpOptions);
+    const headers = new HttpHeaders().set('Authorization',"Bearer "+this.cookies.get('token'));
+    return this.http.post<Articulo>(this.url,producto,{headers});
   }
 
   updateProducto(producto: Articulo): Observable<Articulo>{
-    return this.http.put<Articulo>(this.url+'/'+producto.id_articulo,producto,this.httpOptions);
+    const headers = new HttpHeaders().set('Authorization',"Bearer "+this.cookies.get('token'));
+    return this.http.put<Articulo>(this.url+'/'+producto.id_articulo,producto,{headers});
   }
 
 }

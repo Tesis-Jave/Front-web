@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Articulo } from 'src/app/models/productos/articulo';
 import { ProductosService } from 'src/app/services/productos/productos.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-producto',
@@ -19,7 +20,8 @@ export class ProductoComponent {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private porductService: ProductosService // servicio para los articulos
+    private porductService: ProductosService, // servicio para los articulos
+    private loginService: LoginService
   ) {}
 
   labels: string[] = ['Id', 'Nombre', 'Precio'];
@@ -131,5 +133,10 @@ export class ProductoComponent {
 
   navigateTo(route: string) {
     this.router.navigate([route]);
+  }
+
+  cerrarSesion(){
+    this.loginService.logout();
+    this.navigateTo('login');
   }
 }

@@ -3,6 +3,8 @@ import { FormBuilder } from "@angular/forms";
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { NgModel } from '@angular/forms';
+import { LoginService } from 'src/app/services/login/login.service';
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,8 +12,6 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  usuario: string = '';
-  contrasena: string = '';
   failed: boolean = false;
   authenticated: number = 0;
   userName: string = '';
@@ -21,25 +21,44 @@ export class DashboardComponent {
   invalidUsername: boolean | undefined;
   invalidPassword: boolean | undefined;
 
-  constructor(private formbuilder: FormBuilder, private router: Router) {};
+  checkOutForm = this.formbuilder.group({
+    usuario:'',
+    password:''
+  })
+
+  constructor(private formbuilder: FormBuilder, private router: Router,private loginService: LoginService,private cookies:CookieService) {};
 
   navigateTo(route: string){
     this.router.navigate([route]);
   }
 
-  onSubmit() {
-
-    if (this.usuario === this.usuarioDefault && this.contrasena === this.contrasenaDefault) {
-      this.failed = false;
-      this.authenticated = 1;
-      this.userName = this.usuario;
-      this.navigateTo('productos');
-    } else {
-      this.failed = true;
-      this.authenticated = 0;
-      this.userName = '';
-      this.invalidUsername = this.usuario !== 'usuario';
-      this.invalidPassword = this.contrasena !== 'contrasena';
+  ngOnInit(){
+    if(this.cookies.get('token')!=""){
+      this.authenticated=1;
+      this.userName=this.cookies.get('user');
     }
   }
+
+  onSubmit() {
+    let userParam: string;
+    let passParam: string;
+    userParam= ''+ this.checkOutForm.value.usuario;
+    passParam=''+this.checkOutForm.value.password;
+
+    this.loginService.login(userParam,passParam).subscribe(
+      (data):void=>{
+        if (data.token == "error"){
+          alert("Usuario o contraseña incorrecta");
+          this.failed = true;
+        } else {
+          this.loginService.setToken(data.token);
+          this.failed = false;
+          this.userName = userParam;
+          this.authenticated = 1;
+          this.navigateTo('productos');
+        }
+      }
+    )
+  }
+  
 }

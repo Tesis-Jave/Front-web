@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Cafeteria } from 'src/app/models/cafeterias/cafeteria';
 import { CafeteriasService } from 'src/app/services/cafeterias/cafeterias.service';
+import { LoginService } from 'src/app/services/login/login.service';
 @Component({
   selector: 'app-cafeterias',
   templateUrl: './cafeterias.component.html',
@@ -17,7 +18,8 @@ export class CafeteriasComponent {
     constructor(
       private router: Router,
       private formBuilder: FormBuilder,
-      private cafeteriaService: CafeteriasService
+      private cafeteriaService: CafeteriasService,
+      private loginService: LoginService
     ) // declarar servicio de productos
     {}
     labels: string[] = ['Id', 'Nombre', 'Precio'];
@@ -109,5 +111,9 @@ export class CafeteriasComponent {
       console.log(data);
       this.getCafeterias();
     })
+  }
+  cerrarSesion(){
+    this.loginService.logout();
+    this.navigateTo('login');
   }
 }

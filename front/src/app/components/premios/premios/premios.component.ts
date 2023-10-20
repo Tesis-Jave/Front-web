@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Premio } from 'src/app/models/premios/premio';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-premios',
@@ -18,7 +19,8 @@ export class PremiosComponent {
    */
     constructor(
       private router: Router,
-      private formBuilder: FormBuilder
+      private formBuilder: FormBuilder,
+      private loginService: LoginService
     ) // declarar servicio de productos
     {}
     labels: string[] = ['Id', 'Nombre', 'Precio'];
@@ -55,6 +57,9 @@ export class PremiosComponent {
   
     onSubmit() {}
   
-  
+    cerrarSesion(){
+      this.loginService.logout();
+      this.navigateTo('login');
+    }
 
 }

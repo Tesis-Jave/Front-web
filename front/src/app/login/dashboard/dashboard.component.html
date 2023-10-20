@@ -11,13 +11,13 @@
     </div>
     <div class="mitad-derecha">
         <div class="login-box" *ngIf="authenticated == 0" id="form_log">
-            <form id="formulario" (submit)="onSubmit()">
+            <form id="formulario" (submit)="onSubmit()" [formGroup]="checkOutForm">
                 <h2>Iniciar Sesión</h2>
                 <div class="login-input">
-                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" required [(ngModel)]="usuario">
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" formControlName="usuario" required="required">
                 </div>
                 <div class="login-input">
-                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required [(ngModel)]="contrasena">
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" formControlName="password" required="required">
                 </div>
                 <div id="mensaje-error" *ngIf="failed" class="error-message">
                   <p *ngIf="invalidUsername">Usuario incorrecto</p>
