@@ -46,7 +46,7 @@
             <label>Código id de la cafeteria</label>
             <input
               type="number"
-              formControlName="id"
+              formControlName="id_cafeteria"
               placeholder="Ingreseel codigo del premio"
               [ngModel]="cafeteriaInfo.id_cafeteria"
             />
@@ -80,15 +80,6 @@
             />
           </div>
           <div class="input-container">
-            <label>Id tarifa</label>
-            <input
-              type="number"
-              formControlName="id_tarifa"
-              placeholder="Ingrese el id de la tarifa"
-              [ngModel]="cafeteriaInfo.id_tarifa"
-            />
-          </div>
-          <div class="input-container">
             <label>Tipo de cafeteria</label>
             <input
               type="text"
@@ -97,6 +88,16 @@
               [ngModel]="cafeteriaInfo.tipo"
             />
           </div>
+          <div class="input-container">
+            <label>Id tarifa</label>
+            <input
+              type="number"
+              formControlName="id_tarifa"
+              placeholder="Ingrese el id de la tarifa"
+              [ngModel]="cafeteriaInfo.id_tarifa"
+            />
+          </div>
+          
          
           <div class="accept-button">
             <button type="button" class="btn btn-success custom-button">
