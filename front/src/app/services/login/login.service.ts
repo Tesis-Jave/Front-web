@@ -24,7 +24,7 @@ export class LoginService {
       // Se crean los parámetros con el usuario y la contraseña ingresados
       const params = new HttpParams().set('usuario', user).set('password', password);
       // Se realiza una petición POST a la URL especificada con los parámetros y body especificados
-      return this.http.post(this.url+'/login', body, { params: params });
+      return this.http.post(this.url+'/loginA', body, { params: params });
     }
     setToken(token: string) {
       this.cookies.set("token", token);
