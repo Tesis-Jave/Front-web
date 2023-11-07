@@ -9,7 +9,8 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class CafeteriasService {
 
-  url = 'http://localhost:3000/cafeterias'
+  url = 'https://ds9vkcnn-3000.use2.devtunnels.ms/cafeterias'
+  //url = 'http://localhost:3000/cafeterias'
   constructor(private http: HttpClient,private cookies:CookieService) { }
 
   private httpOptions = {

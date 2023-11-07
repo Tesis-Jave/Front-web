@@ -9,7 +9,8 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class ProductosService {
 
-  url = 'http://localhost:3000/articulos'
+  url = 'https://ds9vkcnn-3000.use2.devtunnels.ms/articulos'
+  //url = 'http://localhost:3000/articulos'
   constructor(private http: HttpClient,private cookies:CookieService) { }
 
 

@@ -47,16 +47,17 @@ export class DashboardComponent {
 
     this.loginService.login(userParam,passParam).subscribe(
       (data):void=>{
-        if (data.token == "error"){
-          alert("Usuario o contraseña incorrecta");
-          this.failed = true;
-        } else {
+        {
           this.loginService.setToken(data.token);
           this.failed = false;
           this.userName = userParam;
           this.authenticated = 1;
           this.navigateTo('productos');
         }
+      },
+      (error) =>{
+        alert("Usuario o contraseña incorrecta");
+        this.failed = true;
       }
     )
   }

@@ -9,7 +9,8 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class LoginService {
 
-  url = 'http://localhost:3000/perfils'
+  url = 'https://ds9vkcnn-3000.use2.devtunnels.ms/perfils'
+  //url = 'http://localhost:3000/perfils'
 
   constructor(
     private http: HttpClient,
