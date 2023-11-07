@@ -6,4 +6,16 @@ export class Premio {
         public fechaInicio: Date,
         public fechaFin: Date,
     ){}
+
+
+    public static getProperties(): Array<string>{
+        let premio: string[] = [
+            'Id',
+            'ArticuloId',
+            'PrecioNuevo',
+            'FechaInicio',
+            'FechaFin'
+        ]
+        return premio;
+    }
 }

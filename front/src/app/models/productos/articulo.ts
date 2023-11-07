@@ -19,7 +19,7 @@ export class Articulo {
         public id_seccion: number,
         public proveedor: string,
         public unidadmedida: string,
-        public medidareferencia: number,
+        public medidareferencia: string,
         public tipoarticulo: string,
         public stock: number,
         public precio:number,

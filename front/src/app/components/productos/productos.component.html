@@ -5,6 +5,11 @@
     </div>
 
     <div class="button-container">
+
+      <!-- <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Edición</label>
+      </div> -->
       <button
         type="button"
         class="menu-buttons"
@@ -38,7 +43,7 @@
   <div class="right-side">
     <div class="top-box">
       <div class="data-form-layout">
-        <form [formGroup]="createProductform" (ngsubmit)="onSubmit()">
+        <form [formGroup]="createProductform" (ngSubmit)="onSubmit()">
           <div class="input-container">
             <label>Codigó de articulo</label>
             <input
@@ -104,7 +109,7 @@
           <div class="input-container">
             <label>Valor de medida</label>
             <input
-              type="number"
+              type="text"
               formControlName="medidareferencia"
               placeholder="Ingrese el valor de la medida"
               [ngModel]="productoInfo.medidareferencia"
@@ -138,8 +143,8 @@
             />
           </div>
           <div class="accept-button">
-            <button type="button" class="btn btn-success custom-button">
-              Aceptar
+            <button type="submit" class="btn btn-success custom-button">
+              {{formButtonLayoutTitle}}
             </button>
           </div>
         </form>
@@ -183,7 +188,7 @@
             <p class="parameter-info">{{ producto.precio }}</p>
             <div class="button-layout">
               <button class="edit button" (click)="selectedProduct(producto)">
-                Modificar
+                Modicar
               </button>
               <button
                 class="delete button"
@@ -191,8 +196,6 @@
               >
                 Eliminar
               </button>
-              <!-- <button class="edit button">Modificar</button>
-              <button class="delete button">Eliminar</button> -->
             </div>
           </div>
         </div>
