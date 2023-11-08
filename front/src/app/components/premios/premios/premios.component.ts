@@ -26,7 +26,7 @@ export class PremiosComponent {
     ) // declarar servicio de productos
     {}
     labels: string[] = ['Id', 'Nombre', 'Precio'];
-    premioInfo: Premio = new Premio(0,0,0,new Date(),new Date());
+    premioInfo: Premio = new Premio(0,'',0,0,new Date(),new Date());
     premioList: Premio[] = []
 
     formButtonLayoutTitle: string = 'Crear';
@@ -36,6 +36,7 @@ export class PremiosComponent {
   
     createProductform = this.formBuilder.group({
       id:[''],
+      descripcion:[''],
       articuloId:[''],
       precioNuevo:[''],
       fechaInicio:[''],
@@ -53,10 +54,11 @@ export class PremiosComponent {
     }
   
     closeInputFormLayout() {
-      this.premioInfo = new Premio(0,0,0,new Date(),new Date());
+      this.premioInfo = new Premio(0,'',0,0,new Date(),new Date());
       this.createProductform.reset();
     }
     selectedPromo(promo: Premio){
+      console.log('este es el id:  ',this.premioInfo.id);
       this.premioInfo = promo;
       this.formButtonLayoutTitle = 'Actualizar';
       this.createLayoutActivate = false;
@@ -64,6 +66,7 @@ export class PremiosComponent {
     }
     onSubmit(){
       let id: number = parseInt(''+this.createProductform.value.id);
+      let descripcion: string = '' + this.createProductform.value.descripcion;
       let articuloId: number = parseInt(''+this.createProductform.value.articuloId);
       let precioNuevo: number = parseInt(''+ this.createProductform.value.precioNuevo);
       let fechaInicio: Date = new Date(''+this.createProductform.value.fechaInicio)
@@ -72,6 +75,7 @@ export class PremiosComponent {
       if(this.updateLayoutActivate){
         let promo = new Premio(
           id,
+          descripcion,
           articuloId,
           precioNuevo,
           fechaInicio,
@@ -83,6 +87,7 @@ export class PremiosComponent {
       if(this.createLayoutActivate){
         let promo = new Premio(
           id,
+          descripcion,
           articuloId,
           precioNuevo,
           fechaInicio,

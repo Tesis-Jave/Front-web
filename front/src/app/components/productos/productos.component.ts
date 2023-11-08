@@ -58,6 +58,7 @@ export class ProductoComponent {
   closeInputFormLayout() {
     this.productoInfo = new Articulo(0, '', 0, 0, '', '', '', '', 0, 0);
     this.createProductform.reset();
+    this.formButtonLayoutTitle = 'Crear';
   }
 
   selectedProduct(producto: Articulo): void {

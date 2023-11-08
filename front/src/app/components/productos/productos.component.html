@@ -1,15 +1,21 @@
 <body>
   <div class="left-side">
+
+    <div class="button-container">
+      <button
+      type="button"
+      class="menu-buttons"
+      (click)="closeInputFormLayout()"
+    >
+      Limpiar
+    </button>
+    </div>
+
     <div class="jave-logo">
       <img src="\assets\images\JAVEPUNTOSB.png" alt="" />
     </div>
 
     <div class="button-container">
-
-      <!-- <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Edición</label>
-      </div> -->
       <button
         type="button"
         class="menu-buttons"
@@ -17,7 +23,6 @@
       >
         Premios
       </button>
-      <!-- Boton de creacion y cancelacion -->
 
       <button
         type="button"
@@ -45,7 +50,7 @@
       <div class="data-form-layout">
         <form [formGroup]="createProductform" (ngSubmit)="onSubmit()">
           <div class="input-container">
-            <label>Codigó de articulo</label>
+            <label>Código de articulo</label>
             <input
               type="number"
               formControlName="id_articulo"
@@ -63,7 +68,7 @@
               [ngModel]="productoInfo.descripcion"
             />
           </div>
-          <div class="input-container">
+          <!-- <div class="input-container">
             <label>Departamento</label>
             <input
               type="number"
@@ -71,6 +76,22 @@
               placeholder="Ingrese el departamento"
               [ngModel]="productoInfo.id_dpto"
             />
+          </div> -->
+          <div class="input-container">
+            <label>Departamento</label>
+            <select
+            formControlName="id_dpto"
+              placeholder="Ej: Mantenimiento"
+              [ngModel]="productoInfo.id_dpto"
+            >
+              <option value="" disabled selected>
+                Seleccione el departamento
+              </option>
+              <option value="1">Panaderia</option>
+              <option value="2">Reposteria</option>
+              <option value="3">Modificación</option>
+              <option value="4">Saludables</option>
+            </select>
           </div>
           <div class="input-container">
             <label>Sección</label>
