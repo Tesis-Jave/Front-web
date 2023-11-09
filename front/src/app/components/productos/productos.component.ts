@@ -50,9 +50,10 @@ export class ProductoComponent {
     this.labels = Articulo.getProperties();
     this.porductService.getAllproducto().subscribe((data) => {
       this.productosList = data;
+      console.log('Estos son los productos ');
       console.log(this.productosList);
     });
-    console.log('onInit ');
+    
   }
 
   closeInputFormLayout() {

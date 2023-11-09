@@ -48,7 +48,7 @@
   <div class="right-side">
     <div class="top-box">
       <div class="data-form-layout">
-        <form [formGroup]="createProductform" (ngSubmit)="onSubmit()">
+        <form [formGroup]="createPromoform" (ngSubmit)="onSubmit()">
           <div class="input-container">
             <label>Código id del premio</label>
             <input
@@ -96,6 +96,19 @@
             />
           </div>
 
+          <div class="input-container">
+            <label>Seleccionar Productos</label>
+            <mat-form-field appearance="fill">
+              <mat-label>Productos</mat-label>
+              <mat-select [(ngModel)]="productosSeleccionados" multiple>
+                <mat-option *ngFor="let producto of productosList" [value]="producto">
+                  {{ producto.descripcion }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+
           <div class="accept-button">
             <button type="button" class="btn btn-success custom-button">
               {{formButtonLayoutTitle}}
@@ -142,6 +155,9 @@
               </button>
               <button class="delete button" (click)="deletePromo(promo.id)">
                 Eliminar
+              </button>
+              <button class="add-articulo button" (click)="agregarArticulo(promo.id)">
+                Agregar Artículo
               </button>
             </div>
           </div>

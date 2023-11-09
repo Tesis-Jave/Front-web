@@ -19,6 +19,20 @@ export class PremiosService {
     headers: new HttpHeaders().set('Authorization', this.cookies.get('token')),
   };
 
+  // Obtener artículos por id de promoción
+  getArticulosPorPromocion(idPromocion: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}${idPromocion}/articulos/`);
+  }
+
+   // Agregar un nuevo artículo a una promoción
+   agregarArticuloAPromocion(idPromocion: number, idArticulo: number): Observable<any> {
+    const body = {
+      id_promocion: idPromocion,
+      id_articulo: idArticulo
+    };
+    return this.http.post(`${this.apiUrl}/articulopromocion`, body);
+  }
+
   getAllpromos(): Observable<Premio[]> {
     const headers = new HttpHeaders().set(
       'Authorization',

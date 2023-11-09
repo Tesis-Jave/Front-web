@@ -23,7 +23,6 @@ export class Articulo {
         public tipoarticulo: string,
         public stock: number,
         public precio:number,
-
     ){}
 
     //Metodo describe: Array<string>

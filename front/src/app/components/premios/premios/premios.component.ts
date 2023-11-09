@@ -5,6 +5,11 @@ import { Router } from '@angular/router';
 import { Premio } from 'src/app/models/premios/premio';
 import { LoginService } from 'src/app/services/login/login.service';
 import { PremiosService } from 'src/app/services/premios/premios.service';
+import { ActivatedRoute } from '@angular/router';
+import { ProductosService } from 'src/app/services/productos/productos.service';
+import { Articulo } from 'src/app/models/productos/articulo';
+
+
 
 @Component({
   selector: 'app-premios',
@@ -20,21 +25,28 @@ export class PremiosComponent {
    */
     constructor(
       private router: Router,
+      private route: ActivatedRoute,
       private formBuilder: FormBuilder,
       private loginService: LoginService,
-      private promoService: PremiosService
+      private promoService: PremiosService,
+      private porductService: ProductosService, // servicio opara productos
     ) // declarar servicio de productos
     {}
     labels: string[] = ['Id', 'Nombre', 'Precio'];
     premioInfo: Premio = new Premio(0,'',0,0,new Date(),new Date());
     premioList: Premio[] = []
+    productosList: Articulo[] = [];
+    productosSeleccionados: Articulo[] = [];  // Lista de productos seleccionados
+
+    idPromocion: number = 0;
+    articulosXPromo: any[] = [];
 
     formButtonLayoutTitle: string = 'Crear';
     
     createLayoutActivate: boolean = true;
     updateLayoutActivate: boolean = false;
   
-    createProductform = this.formBuilder.group({
+    createPromoform = this.formBuilder.group({
       id:[''],
       descripcion:[''],
       articuloId:[''],
@@ -49,13 +61,52 @@ export class PremiosComponent {
       console.log('onInit ');
       this.promoService.getAllpromos().subscribe((data) =>{
         this.premioList = data;
+        console.log('estos son las promos: ')
         console.log(this.premioList);
       })
+
+      // se crea lista con todos los articulos
+      this.porductService.getAllproducto().subscribe((data) => {
+        this.productosList = data;
+        
+        console.log('Estos son los productos ');
+        console.log(this.productosList);
+      });
+
+      this.route.paramMap.subscribe(params => {
+        const idParam = params.get('id');
+        this.idPromocion = idParam ? +idParam : 0;
+  
+        // Obtener los artículos relacionados con la promoción
+        this.promoService.getArticulosPorPromocion(this.idPromocion).subscribe(data => {
+          this.articulosXPromo = data;
+        });
+      });
+    }
+    toggleSeleccion(producto: Articulo): void {
+      const index = this.productosSeleccionados.indexOf(producto);
+      if (index === -1) {
+        // Si el producto no está en la lista de seleccionados, agrégalo
+        this.productosSeleccionados.push(producto);
+      } else {
+        // Si el producto ya está en la lista de seleccionados, quítalo
+        this.productosSeleccionados.splice(index, 1);
+      }
+    }
+
+    //  Método para agregar un nuevo artículo a la promoción
+    agregarArticulo(idArticulo: number): void {
+      this.promoService.agregarArticuloAPromocion(this.idPromocion, idArticulo).subscribe(response => {
+        // Actualizar la lista de artículos después de agregar uno nuevo
+        this.promoService.getArticulosPorPromocion(this.idPromocion).subscribe(data => {
+          this.articulosXPromo = data;
+        });
+      });
     }
   
     closeInputFormLayout() {
       this.premioInfo = new Premio(0,'',0,0,new Date(),new Date());
-      this.createProductform.reset();
+      this.createPromoform.reset();
     }
     selectedPromo(promo: Premio){
       console.log('este es el id:  ',this.premioInfo.id);
@@ -65,12 +116,12 @@ export class PremiosComponent {
       this.updateLayoutActivate = true;
     }
     onSubmit(){
-      let id: number = parseInt(''+this.createProductform.value.id);
-      let descripcion: string = '' + this.createProductform.value.descripcion;
-      let articuloId: number = parseInt(''+this.createProductform.value.articuloId);
-      let precioNuevo: number = parseInt(''+ this.createProductform.value.precioNuevo);
-      let fechaInicio: Date = new Date(''+this.createProductform.value.fechaInicio)
-      let fechaFin: Date = new Date(''+this.createProductform.value.fechaFin);
+      let id: number = parseInt(''+this.createPromoform.value.id);
+      let descripcion: string = '' + this.createPromoform.value.descripcion;
+      let articuloId: number = parseInt(''+this.createPromoform.value.articuloId);
+      let precioNuevo: number = parseInt(''+ this.createPromoform.value.precioNuevo);
+      let fechaInicio: Date = new Date(''+this.createPromoform.value.fechaInicio)
+      let fechaFin: Date = new Date(''+this.createPromoform.value.fechaFin);
 
       if(this.updateLayoutActivate){
         let promo = new Premio(
@@ -104,6 +155,7 @@ export class PremiosComponent {
         console.log(this.premioList);
       })
     }
+
     //delete
     deletePromo(id: number){
       this.promoService.deletePromo(id).subscribe((data) =>{
@@ -123,7 +175,7 @@ export class PremiosComponent {
       this.promoService.createPromo(promo).subscribe((data) =>{
         console.log(data);
         this.getPremios();
-        this.createProductform.reset();
+        this.createPromoform.reset();
       })
     }
     //update
@@ -131,7 +183,7 @@ export class PremiosComponent {
       this.promoService.updatePromo(promo).subscribe((data) =>{
         console.log(data);
         this.getPremios();
-        this.createProductform.reset();
+        this.createPromoform.reset();
       })
     }
   
