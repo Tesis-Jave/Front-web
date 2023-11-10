@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Articulo } from 'src/app/models/productos/articulo';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { LoginService } from 'src/app/services/login/login.service';
+import { ProductoNuevo } from 'src/app/models/productos/producto-nuevo';
 
 @Component({
   selector: 'app-producto',
@@ -24,7 +25,7 @@ export class ProductoComponent {
     private loginService: LoginService
   ) {}
 
-  labels: string[] = ['Id', 'Nombre', 'Precio'];
+  labels: string[] = [];
   productosList: Articulo[] = [];
   productoInfo: Articulo = new Articulo(0, '', 0, 0, '', '', '', '', 0, 0);
 
@@ -34,7 +35,6 @@ export class ProductoComponent {
   updateLayoutActivate: boolean = false;
 
   createProductform = this.formBuilder.group({
-    id_articulo: [''],
     descripcion: [''],
     id_dpto: [''],
     id_seccion: [''],
@@ -80,8 +80,6 @@ export class ProductoComponent {
     let tipoarticulo: string = '' + this.createProductform.value.tipoarticulo;
     let stock: number = parseInt('' + this.createProductform.value.stock);
     let precio: number = parseFloat('' + this.createProductform.value.precio);
-    let Id: number = parseInt(''+this.createProductform.value.id_articulo);
-    //console.log('codigo articulo:' +codArticulo);
 
     console.log('El estado de updateProduct es: ');
     console.log(this.updateLayoutActivate);
@@ -105,8 +103,7 @@ export class ProductoComponent {
     }
     if (this.createLayoutActivate) {
       console.log('entra a crear')
-      let product = new Articulo(
-        Id,
+      let product = new ProductoNuevo(
         descripcion,
         id_dpto,
         id_seccion,
@@ -129,7 +126,7 @@ export class ProductoComponent {
   }
 
   // create
-  addNewProduct(product: Articulo): void {
+  addNewProduct(product: ProductoNuevo): void {
     this.porductService.createProducto(product).subscribe((data) => {
       console.log(data);
       this.getProducts();

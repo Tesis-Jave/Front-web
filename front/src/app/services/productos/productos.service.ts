@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Articulo } from 'src/app/models/productos/articulo';
 import { CookieService } from "ngx-cookie-service";
 import { environment } from 'src/app/config';
+import { ProductoNuevo } from 'src/app/models/productos/producto-nuevo';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class ProductosService {
     const headers = new HttpHeaders().set('Authorization',"Bearer "+this.cookies.get('token'));
     return this.http.get<Articulo>(this.apiUrl +this.ext+'/'+id,{headers});
   }
-  createProducto(producto: Articulo): Observable<Articulo>{
+  createProducto(producto: ProductoNuevo): Observable<Articulo>{
     const headers = new HttpHeaders().set('Authorization',"Bearer "+this.cookies.get('token'));
     return this.http.post<Articulo>(this.apiUrl +this.ext,producto,{headers});
   }

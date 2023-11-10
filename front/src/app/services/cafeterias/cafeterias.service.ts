@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Cafeteria } from 'src/app/models/cafeterias/cafeteria';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/app/config';
+import { CafeteriaNueva } from 'src/app/models/cafeterias/cafeteria-nueva';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +49,7 @@ export class CafeteriasService {
       headers,
     });
   }
-  createCafeteria(cafeteria: Cafeteria): Observable<Cafeteria> {
+  createCafeteria(cafeteria: CafeteriaNueva): Observable<Cafeteria> {
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + this.cookies.get('token')

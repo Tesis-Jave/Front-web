@@ -1,5 +1,14 @@
 <body>
   <div class="left-side">
+    <div class="button-container">
+      <button
+      type="button"
+      class="menu-buttons"
+      (click)="closeInputFormLayout()"
+    >
+      Limpiar
+    </button>
+    </div>
     <div class="jave-logo">
       <img src="\assets\images\JAVEPUNTOSB.png" alt="" />
     </div>
@@ -41,16 +50,7 @@
   <div class="right-side">
     <div class="top-box">
       <div class="data-form-layout">
-        <form [formGroup]="createCafeteriaform" (ngsubmit)="onSubmit()">
-          <div class="input-container">
-            <label>Código id de la cafeteria</label>
-            <input
-              type="number"
-              formControlName="id_cafeteria"
-              placeholder="Ingreseel codigo del premio"
-              [ngModel]="cafeteriaInfo.id_cafeteria"
-            />
-          </div>
+        <form [formGroup]="createCafeteriaform" (ngSubmit)="onSubmit()">
 
           <div class="input-container">
             <label>Descripcion</label>
@@ -97,11 +97,9 @@
               [ngModel]="cafeteriaInfo.id_tarifa"
             />
           </div>
-          
-         
           <div class="accept-button">
-            <button type="button" class="btn btn-success custom-button">
-              Aceptar
+            <button type="submit" class="btn btn-success custom-button">
+              {{formButtonLayoutTitle}}
             </button>
           </div>
         </form>

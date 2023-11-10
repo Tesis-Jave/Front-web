@@ -58,18 +58,21 @@ export class PremiosService {
       headers,
     });
   }
-  createPromo(promo: Premio): Observable<Premio> {
+  createPromo(promo: Premio, productosIds: number[]): Observable<Premio> {
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + this.cookies.get('token')
     );
+    promo.articuloIds = productosIds;
     return this.http.post<Premio>(this.apiUrl + this.ext, promo, { headers });
   }
-  updatePromo(promo: Premio): Observable<Premio> {
+  
+  updatePromo(promo: Premio, productosIds: number[]): Observable<Premio> {
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + this.cookies.get('token')
     );
+    promo.articuloIds = productosIds;
     return this.http.put<Premio>(
       this.apiUrl + this.ext + '/' + promo.id,
       promo,

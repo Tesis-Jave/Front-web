@@ -13,7 +13,7 @@
 export class Articulo {
 
     constructor(
-        public id_articulo: number,
+        public id_articulo: number | null,
         public descripcion: string,
         public id_dpto: number,
         public id_seccion: number,

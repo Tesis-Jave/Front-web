@@ -49,7 +49,7 @@
     <div class="top-box">
       <div class="data-form-layout">
         <form [formGroup]="createProductform" (ngSubmit)="onSubmit()">
-          <div class="input-container">
+          <!-- <div class="input-container">
             <label>Código de articulo</label>
             <input
               type="number"
@@ -57,7 +57,7 @@
               placeholder="Ingreseel codigo del articulo"
               [ngModel]="productoInfo.id_articulo"
             />
-          </div>
+          </div> -->
 
           <div class="input-container">
             <label>Descripción </label>
@@ -68,15 +68,6 @@
               [ngModel]="productoInfo.descripcion"
             />
           </div>
-          <!-- <div class="input-container">
-            <label>Departamento</label>
-            <input
-              type="number"
-              formControlName="id_dpto"
-              placeholder="Ingrese el departamento"
-              [ngModel]="productoInfo.id_dpto"
-            />
-          </div> -->
           <div class="input-container">
             <label>Departamento</label>
             <select
@@ -89,7 +80,7 @@
               </option>
               <option value="1">Panaderia</option>
               <option value="2">Reposteria</option>
-              <option value="3">Modificación</option>
+              <option value="3">Bebidas</option>
               <option value="4">Saludables</option>
             </select>
           </div>
@@ -146,7 +137,7 @@
             />
           </div>
           <div class="input-container">
-            <label>Tipo de articulo</label>
+            <label>Stock</label>
             <input
               type="number"
               formControlName="stock"
@@ -155,7 +146,7 @@
             />
           </div>
           <div class="input-container">
-            <label>Tipo de articulo</label>
+            <label>Precio</label>
             <input
               type="number"
               formControlName="precio"
@@ -213,6 +204,7 @@
               </button>
               <button
                 class="delete button"
+                *ngIf="producto.id_articulo !== null"
                 (click)="deleteProduct(producto.id_articulo)"
               >
                 Eliminar
