@@ -62,6 +62,7 @@ export class CafeteriasComponent {
 
   ngOnInit(): void {
     this.labels = Cafeteria.getProperties();
+    this.labels.push("Acciones");
     this.cafeteriaService.getAllcafeteria().subscribe((data) => {
       this.cafeteriaList = data;
       console.log(this.cafeteriaList);

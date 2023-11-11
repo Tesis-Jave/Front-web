@@ -59,6 +59,7 @@ export class PremiosComponent {
 
   ngOnInit(): void {
     this.labels = Premio.getProperties();
+    this.labels.push("Acciones");
 
     this.getPremios();
 

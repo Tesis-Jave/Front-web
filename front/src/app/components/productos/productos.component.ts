@@ -48,6 +48,7 @@ export class ProductoComponent {
 
   ngOnInit(): void {
     this.labels = Articulo.getProperties();
+    this.labels.push("Acciones");
     this.porductService.getAllproducto().subscribe((data) => {
       this.productosList = data;
       console.log('Estos son los productos ');

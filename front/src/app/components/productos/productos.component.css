@@ -1,11 +1,12 @@
 body {
     margin: 1;
     padding: 1;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: row;
     width: auto;
 }
+
 .right-side {
     display: flex;
     flex-direction: column;
@@ -22,7 +23,8 @@ body {
   .left-side {
     flex: 1;
     width: 30%;
-    height: 100vh;
+    height: 100%;
+    margin-bottom: 0;
     background-color: #821F1F;
     color: white;
     display: flex;
@@ -83,13 +85,15 @@ body {
   }
   
   .main-content {
-    width: 100%;
+
+    width: auto;
     height: 100%; /* Ocupa el espacio restante */
     background-color: #f0f0f0; /* Color de fondo del contenido principal */
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     border-radius: 10px; 
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+    margin-left: 10%;
     }
     /* barra de busqueda*/
 
@@ -205,6 +209,7 @@ body {
     border: 1px solid #CFCFCF;
 }
 
+
 .data-container .labels-container {
     display: flex;
     flex-flow: row nowrap;
@@ -248,7 +253,7 @@ body {
     min-width: 50px;
 
     &:first-child {
-        max-width: 50px;
+        max-width: 80px;
     }
 }
 
