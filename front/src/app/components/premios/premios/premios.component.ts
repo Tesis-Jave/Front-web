@@ -8,218 +8,251 @@ import { PremiosService } from 'src/app/services/premios/premios.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { Articulo } from 'src/app/models/productos/articulo';
-
-
+import { PromoNueva } from 'src/app/models/premios/promo-nueva';
 
 @Component({
   selector: 'app-premios',
   templateUrl: './premios.component.html',
-  styleUrls: ['./premios.component.css']
+  styleUrls: ['./premios.component.css'],
 })
 export class PremiosComponent {
-
-    /**
-   * 
-   * @param formBuilder 
-   * 
+  /**
+   *
+   * @param formBuilder
+   *
    */
-    constructor(
-      private router: Router,
-      private route: ActivatedRoute,
-      private formBuilder: FormBuilder,
-      private loginService: LoginService,
-      private promoService: PremiosService,
-      private porductService: ProductosService, // servicio opara productos
-    ) // declarar servicio de productos
-    {
-      this.createPromoform = this.formBuilder.group({
-        id: [''],
-        descripcion: [''],
-        articuloId: [''],
-        precioNuevo: [''],
-        fechaInicio: [''],
-        fechaFin: [''],
-        productosSeleccionados: []  // Inicializar como un array vacío
-      });
-    }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private promoService: PremiosService,
+    private porductService: ProductosService
+  ) {
+    this.createPromoform = this.formBuilder.group({
+      descripcion: [''],
+      precioNuevo: [''],
+      fechaInicio: [''],
+      fechaFin: [''],
+      productosSeleccionados: [],
+    });
+  }
 
-    createPromoform: FormGroup;
+  createPromoform: FormGroup;
 
-    labels: string[] = ['Id', 'Nombre', 'Precio'];
-    premioInfo: Premio = new Premio(0, '', [], 0, new Date(), new Date());
-    premioList: Premio[] = []
-    productosList: Articulo[] = [];
-    productosSeleccionados: Articulo[] = [];  // Lista de productos seleccionados
+  labels: string[] = [];
+  premioInfo: Premio = new Premio(0, '', [], 0, new Date(), new Date());
+  premioList: Premio[] = [];
 
-    idPromocion: number = 0;
-    articulosXPromo: any[] = [];
 
-    formButtonLayoutTitle: string = 'Crear';
-    
-    createLayoutActivate: boolean = true;
-    updateLayoutActivate: boolean = false;
-  
-    // createPromoform = new FormGroup({
-    //   id: new FormControl(''),
-    //   descripcion:new FormControl(''),
-    //   articuloId:new FormControl(''),
-    //   precioNuevo:new FormControl(''),
-    //   fechaInicio:new FormControl(''),
-    //   fechaFin:new FormControl(''),
-    //   productosSeleccionados: []
 
-    // });
-  
-    ngOnInit(): void {
-      this.labels = Premio.getProperties();
-      console.log('onInit ');
-      this.promoService.getAllpromos().subscribe((data) =>{
-        this.premioList = data;
-        console.log('estos son las promos: ')
-        console.log(this.premioList);
-      })
+  productosList: Articulo[] = [];
 
-      // se crea lista con todos los articulos
-      this.porductService.getAllproducto().subscribe((data) => {
-        this.productosList = data;
-        
-        console.log('Estos son los productos ');
-        console.log(this.productosList);
-        console.log('Productos seleccionados:');
-        console.log(this.productosSeleccionados);
-      });
+  productosSeleccionados: Articulo[] = []; // Lista de productos seleccionados
 
-      this.route.paramMap.subscribe(params => {
-        const idParam = params.get('id');
-        this.idPromocion = idParam ? +idParam : 0;
-  
-        // Obtener los artículos relacionados con la promoción
-        this.promoService.getArticulosPorPromocion(this.idPromocion).subscribe(data => {
-          this.articulosXPromo = data;
-        });
-      });
-    }
-    toggleSeleccion(producto: Articulo): void {
-      const index = this.productosSeleccionados.indexOf(producto);
-      if (index === -1) {
-        // Si el producto no está en la lista de seleccionados, agrégalo
-        console.log('Producto agregado:', producto);
-      } else {
-        // Si el producto ya está en la lista de seleccionados, quítalo
-        this.productosSeleccionados.splice(index, 1);
-        console.log('Producto eliminado:', producto);
-      }
-    }
+  idPromocion: number = 0;
+  articulosXPromo: Articulo[] = [];
 
-    //  Método para agregar un nuevo artículo a la promoción
-    agregarArticulo(idArticulo: number): void {
-      this.promoService.agregarArticuloAPromocion(this.idPromocion, idArticulo).subscribe(response => {
+  formButtonLayoutTitle: string = 'Crear';
+
+  createLayoutActivate: boolean = true;
+  updateLayoutActivate: boolean = false;
+
+  // createPromoform = new FormGroup({
+  //   id_promocion: new FormControl(''),
+  //   descripcion:new FormControl(''),
+  //   articuloId:new FormControl(''),
+  //   precioNuevo:new FormControl(''),
+  //   fechaInicio:new FormControl(''),
+  //   fechaFin:new FormControl(''),
+  //   // productosSeleccionados: []
+
+  // });
+
+  ngOnInit(): void {
+    this.labels = Premio.getProperties();
+
+    this.getPremios();
+
+    // se crea lista con todos los articulos
+    this.porductService.getAllproducto().subscribe((data) => {
+      this.productosList = data;
+    });
+  }
+
+  //  Método para agregar un nuevo artículo a la promoción
+  agregarArticulo(idArticulo: number): void {
+    this.promoService
+      .agregarArticuloAPromocion(this.idPromocion, idArticulo)
+      .subscribe((response) => {
         // Actualizar la lista de artículos después de agregar uno nuevo
-        this.promoService.getArticulosPorPromocion(this.idPromocion).subscribe(data => {
-          this.articulosXPromo = data;
-        });
+        this.promoService
+          .getArticulosPorPromocion(this.idPromocion)
+          .subscribe((data) => {
+            this.articulosXPromo = data;
+
+          });
       });
-    }
+  }
+
+  closeInputFormLayout() {
+    this.premioInfo = new Premio(0, '', [], 0, new Date(), new Date());
+    // llenar otra vez con todos los productos disp
+    // this.porductService.getAllproducto().subscribe((data) => {
+    //   this.productosList = data;
+    // });
+    this.formButtonLayoutTitle = 'Crear';
+    this.createPromoform.reset();
+  }
+
+  selectedPromo(promo: Premio): void {
+    console.log('Entrando a selectedPromo');
+    console.log('Valor de promo:', promo);
+    this.premioInfo = promo;
+    console.log('precio nuevo: ', this.premioInfo.precioNuevo);
+    if (promo) {
+      if (promo.id_promocion !== undefined) {
+        // this.premioInfo = { ...promo, id_promocion: promo.id_promocion };
+
+        // Llamada asíncrona
+        this.promoService
+          .getArticulosPorPromocion(promo.id_promocion)
+          .subscribe(
+            (data) => {
+              console.log('Respuesta de getArticulosPorPromocion:', data);
+
+              this.articulosXPromo = data;
   
-    closeInputFormLayout() {
-      this.premioInfo = new Premio(0, '', [], 0, new Date(), new Date());
+              console.log('this.articulosXPromo:', this.articulosXPromo);
+              // this.productosList = this.articulosXPromo;
+              this.formButtonLayoutTitle = 'Actualizar';
+              this.createLayoutActivate = false;
+              this.updateLayoutActivate = true;
+            },
+            (error) => {
+              console.error(
+                'Error en la solicitud getArticulosPorPromocion:',
+                error
+              );
+            }
+          );
+      } else {
+        console.log('El id_promocion de promo es indefinido');
+      }
+    } else {
+      console.log('El objeto promo es nulo o indefinido');
+    }
+  }
+
+  productoEstaEnPromo(producto: Articulo): boolean {
+
+    for(let i = 0 ; i < this.articulosXPromo.length ; i++){
+      // console.log('antes: ', this.articulosXPromo[i])
+      // console.log('producrto ', producto)
+      if(this.articulosXPromo[i].id_articulo === producto.id_articulo ){
+        console.log('entro a if: ')
+
+        return true;
+
+      }
+    }
+
+    return false;
+  }
+  
+  
+
+  onSubmit() {
+    let id_promocion: number = parseInt(
+      '' + this.createPromoform.value.id_promocion
+    );
+    let descripcion: string = '' + this.createPromoform.value.descripcion;
+    let precioNuevo: number = parseInt(
+      '' + this.createPromoform.value.precioNuevo
+    );
+    let fechaInicio: Date = new Date(
+      '' + this.createPromoform.value.fechaInicio
+    );
+    let fechaFin: Date = new Date('' + this.createPromoform.value.fechaFin);
+
+    // let productosIds: number[] = this.productosSeleccionados.map(producto => producto.id_articulo);
+    let productosIds: number[] = this.productosSeleccionados
+      .filter((producto) => producto.id_articulo !== null) // Filtra los elementos que no son null
+      .map((producto) => producto.id_articulo as number);
+
+    if (this.updateLayoutActivate) {
+      let promo = new Premio(
+        id_promocion,
+        descripcion,
+        productosIds,
+        precioNuevo,
+        fechaInicio,
+        fechaFin
+      );
+      this.updatePromo(promo, productosIds);
+    }
+    if (this.createLayoutActivate) {
+      let promo = new Premio(
+        id_promocion,
+        descripcion,
+        productosIds,
+        precioNuevo,
+        fechaInicio,
+        fechaFin
+      );
+      this.addNewPromo(promo, productosIds);
+    }
+  }
+
+  //getAll
+  getPremios() {
+    console.log('esta es la lista de premios ');
+    this.promoService.getAllpromos().subscribe((data) => {
+      this.premioList = data;
+      console.log(this.premioList);
+    });
+    this.premioList.forEach;
+  }
+
+  //delete
+  deletePromo(id_promocion: number) {
+    this.promoService.deletePromo(id_promocion).subscribe((data) => {
+      console.log(data);
+      this.getPremios();
+    });
+  }
+
+  //getById
+  getPromoById(id_promocion: number) {
+    this.promoService.getPromoById(id_promocion).subscribe((data) => {
+      this.premioInfo = data;
+      console.log(this.premioInfo);
+    });
+  }
+
+  //create promo con ids de promo
+  addNewPromo(promo: PromoNueva, productosIds: number[]): void {
+    this.promoService.createPromo(promo, productosIds).subscribe((data) => {
+      console.log(data);
+      this.getPremios();
       this.createPromoform.reset();
-    }
-    selectedPromo(promo: Premio){
-      console.log('este es el id:  ',this.premioInfo.id);
-      this.premioInfo = promo;
-      this.formButtonLayoutTitle = 'Actualizar';
-      this.createLayoutActivate = false;
-      this.updateLayoutActivate = true;
-    }
-    onSubmit(){
-      let id: number = parseInt(''+this.createPromoform.value.id);
-      let descripcion: string = '' + this.createPromoform.value.descripcion;
-      let articuloId: number = parseInt(''+this.createPromoform.value.articuloId);
-      let precioNuevo: number = parseInt(''+ this.createPromoform.value.precioNuevo);
-      let fechaInicio: Date = new Date(''+this.createPromoform.value.fechaInicio)
-      let fechaFin: Date = new Date(''+this.createPromoform.value.fechaFin);
+    });
+  }
+  //update promo con ids de products
+  updatePromo(promo: Premio, productosIds: number[]): void {
+    this.promoService.updatePromo(promo, productosIds).subscribe((data) => {
+      console.log(data);
+      this.getPremios();
+      this.createPromoform.reset();
+    });
+  }
 
-      // let productosIds: number[] = this.productosSeleccionados.map(producto => producto.id_articulo);
-      let productosIds: number[] = this.productosSeleccionados
-      .filter(producto => producto.id_articulo !== null) // Filtra los elementos que no son null
-      .map(producto => producto.id_articulo as number);
-      
-      if(this.updateLayoutActivate){
-        let promo = new Premio(
-          id,
-          descripcion,
-          productosIds,
-          precioNuevo,
-          fechaInicio,
-          fechaFin
-        );
-        this.updatePromo(promo, productosIds);
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 
-      }
-      if(this.createLayoutActivate){
-        let promo = new Premio(
-          id,
-          descripcion,
-          productosIds,
-          precioNuevo,
-          fechaInicio,
-          fechaFin
-        );
-        this.addNewPromo(promo, productosIds);
-      }
-    }
-
-    //getAll
-    getPremios(){
-      this.promoService.getAllpromos().subscribe((data) =>{
-        this.premioList = data;
-        console.log(this.premioList);
-      })
-    }
-
-    //delete
-    deletePromo(id: number){
-      this.promoService.deletePromo(id).subscribe((data) =>{
-        console.log(data);
-        this.getPremios();
-      })
-    }
-    
-    //getById
-    getPromoById(id: number){
-      this.promoService.getPromoById(id).subscribe((data) =>{
-        this.premioInfo = data;
-        console.log(this.premioInfo);
-      })
-    }
-
-    //create promo con ids de promo
-    addNewPromo(promo:Premio, productosIds: number[]): void{
-      this.promoService.createPromo(promo, productosIds).subscribe((data) => {
-        console.log(data);
-        this.getPremios();
-        this.createPromoform.reset();
-      });
-    }
-    //update promo con ids de products
-    updatePromo(promo: Premio, productosIds: number[]): void{
-      this.promoService.updatePromo(promo, productosIds).subscribe((data) => {
-        console.log(data);
-        this.getPremios();
-        this.createPromoform.reset();
-      });
-    }
-  
-  
-    navigateTo(route: string) {
-      this.router.navigate([route]);
-    }
-
-  
-    cerrarSesion(){
-      this.loginService.logout();
-      this.navigateTo('login');
-    }
-
+  cerrarSesion() {
+    this.loginService.logout();
+    this.navigateTo('login');
+  }
 }

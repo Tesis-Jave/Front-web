@@ -11,8 +11,6 @@ import { ProductoNuevo } from 'src/app/models/productos/producto-nuevo';
 })
 export class ProductosService {
 
-  // url = 'https://ds9vkcnn-3000.use2.devtunnels.ms/articulos'
-  //url = 'http://localhost:3000/articulos'
   private apiUrl = environment.apiUrl
   private ext = '/articulos'
   constructor(private http: HttpClient,private cookies:CookieService) { }

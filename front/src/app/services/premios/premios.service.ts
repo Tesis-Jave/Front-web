@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Premio } from 'src/app/models/premios/premio';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/config';
+import { PromoNueva } from 'src/app/models/premios/promo-nueva';
 
 @Injectable({
   providedIn: 'root',
@@ -12,23 +13,28 @@ export class PremiosService {
   private apiUrl = environment.apiUrl;
   private ext = '/promociones';
 
-  // url = 'http://localhost:3000/promociones';
+  // url = 'http://localhost:3000/promociones/1/articulos';
   constructor(private http: HttpClient, private cookies: CookieService) {}
 
-  private httpOptions = {
-    headers: new HttpHeaders().set('Authorization', this.cookies.get('token')),
-  };
+  private get httpOptions() {
+    return {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.cookies.get('token')),
+    };
+  }
 
   // Obtener artículos por id de promoción
   getArticulosPorPromocion(idPromocion: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}${idPromocion}/articulos/`);
+    return this.http.get(`${this.apiUrl}${this.ext}/${idPromocion}/articulos`, this.httpOptions);
   }
 
-   // Agregar un nuevo artículo a una promoción
-   agregarArticuloAPromocion(idPromocion: number, idArticulo: number): Observable<any> {
+  // Agregar un nuevo artículo a una promoción
+  agregarArticuloAPromocion(
+    idPromocion: number,
+    idArticulo: number
+  ): Observable<any> {
     const body = {
       id_promocion: idPromocion,
-      id_articulo: idArticulo
+      id_articulo: idArticulo,
     };
     return this.http.post(`${this.apiUrl}/articulopromocion`, body);
   }
@@ -58,15 +64,20 @@ export class PremiosService {
       headers,
     });
   }
-  createPromo(promo: Premio, productosIds: number[]): Observable<Premio> {
+  createPromo(
+    promo: PromoNueva,
+    productosIds: number[]
+  ): Observable<PromoNueva> {
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + this.cookies.get('token')
     );
     promo.articuloIds = productosIds;
-    return this.http.post<Premio>(this.apiUrl + this.ext, promo, { headers });
+    return this.http.post<PromoNueva>(this.apiUrl + this.ext, promo, {
+      headers,
+    });
   }
-  
+
   updatePromo(promo: Premio, productosIds: number[]): Observable<Premio> {
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -74,7 +85,7 @@ export class PremiosService {
     );
     promo.articuloIds = productosIds;
     return this.http.put<Premio>(
-      this.apiUrl + this.ext + '/' + promo.id,
+      this.apiUrl + this.ext + '/' + promo.id_promocion,
       promo,
       { headers }
     );

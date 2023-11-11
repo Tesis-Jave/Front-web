@@ -1,8 +1,8 @@
 export class Premio {
     constructor(
-      public id: number,
+      public id_promocion: number,
       public descripcion: string,
-      public articuloIds: number[], // Cambiado a un array de números
+      public articuloIds: number[], 
       public precioNuevo: number,
       public fechaInicio: Date,
       public fechaFin: Date
@@ -11,8 +11,7 @@ export class Premio {
     public static getProperties(): Array<string> {
       let premio: string[] = [
         'Id',
-        'Descripcion',
-        'ArticuloIds', // Cambiado a ArticuloIds para reflejar el cambio en el nombre del campo
+        'Descripcion', 
         'PrecioNuevo',
         'FechaInicio',
         'FechaFin'

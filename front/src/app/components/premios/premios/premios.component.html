@@ -4,7 +4,7 @@
       <button
       type="button"
       class="menu-buttons"
-      (click)="closeInputFormLayout()"
+       (click)="closeInputFormLayout()" 
     >
       Limpiar
     </button>
@@ -49,31 +49,23 @@
     <div class="top-box">
       <div class="data-form-layout">
         <form [formGroup]="createPromoform" (ngSubmit)="onSubmit()">
+
           <div class="input-container">
-            <label>Código id del premio</label>
+            <label>Descripcion</label>
             <input
-              type="number"
-              formControlName="id"
-              placeholder="Ingreseel codigo del premio"
-              [ngModel]="premioInfo.id"
+              type="text"
+              formControlName="descripcion"
+              placeholder="Ingrese el nombre de la promocion"
+              [ngModel]="premioInfo.descripcion"
             />
           </div>
 
-          <!-- <div class="input-container">
-            <label>Id(s) de Articulo</label>
-            <input
-              type="number"
-              formControlName="articuloId"
-              placeholder="Ingrese el id del articulo"
-              [ngModel]="premioInfo.articuloId"
-            />
-          </div> -->
           <div class="input-container">
             <label>Precio</label>
             <input
               type="number"
               formControlName="precioNuevo"
-              placeholder="Ingrese el nuevo precio del articulo"
+              placeholder="Ingrese el nuevo precio de la promocion "
               [ngModel]="premioInfo.precioNuevo"
             />
           </div>
@@ -100,15 +92,14 @@
             <label>Seleccionar Productos</label>
             <mat-form-field appearance="fill">
               <mat-label>Productos</mat-label>
-              <mat-select formControlName="productosSeleccionados" multiple>
-                <mat-option *ngFor="let producto of productosList" [value]="producto">
+              <mat-select formControlName="productosSeleccionados"  multiple  >
+                <mat-option *ngFor="let producto of productosList">
                   {{ producto.descripcion }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           
-
           <div class="accept-button">
             <button type="submit" class="btn btn-success custom-button">
               {{formButtonLayoutTitle}}
@@ -143,7 +134,7 @@
           [ngClass]="{ 'last-row': last }"
         >
           <div class="row-container">
-            <p class="parameter-info">{{ promo.id }}</p>
+            <p class="parameter-info">{{ promo.id_promocion }}</p>
             <p class="parameter-info">{{ promo.descripcion }}</p>
             <!-- <p class="parameter-info">{{ promo.articuloId }}</p> -->
             <p class="parameter-info">{{ promo.precioNuevo }}</p>
@@ -153,11 +144,8 @@
               <button class="edit button" (click)="selectedPromo(promo)">
                 Modificar
               </button>
-              <button class="delete button" (click)="deletePromo(promo.id)">
+              <button class="delete button" (click)="deletePromo(promo.id_promocion)">
                 Eliminar
-              </button>
-              <button class="add-articulo button" (click)="agregarArticulo(promo.id)">
-                Agregar Artículo
               </button>
             </div>
           </div>
