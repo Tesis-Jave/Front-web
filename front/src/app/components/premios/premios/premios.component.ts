@@ -31,7 +31,6 @@ export class PremiosComponent {
   ) {
     this.createPromoform = this.formBuilder.group({
       descripcion: [''],
-      precioNuevo: [''],
       fechaInicio: [''],
       fechaFin: [''],
       productosSeleccionados: [],
@@ -41,7 +40,7 @@ export class PremiosComponent {
   createPromoform: FormGroup;
 
   labels: string[] = [];
-  premioInfo: Premio = new Premio(0, '', [], 0, new Date(), new Date());
+  premioInfo: Premio = new Premio(0, '', [], "", "");
   premioList: Premio[] = [];
 
 
@@ -57,17 +56,6 @@ export class PremiosComponent {
 
   createLayoutActivate: boolean = true;
   updateLayoutActivate: boolean = false;
-
-  // createPromoform = new FormGroup({
-  //   id_promocion: new FormControl(''),
-  //   descripcion:new FormControl(''),
-  //   articuloId:new FormControl(''),
-  //   precioNuevo:new FormControl(''),
-  //   fechaInicio:new FormControl(''),
-  //   fechaFin:new FormControl(''),
-  //   // productosSeleccionados: []
-
-  // });
 
   ngOnInit(): void {
     this.labels = Premio.getProperties();
@@ -96,23 +84,18 @@ export class PremiosComponent {
   }
 
   closeInputFormLayout() {
-    this.premioInfo = new Premio(0, '', [], 0, new Date(), new Date());
-    // llenar otra vez con todos los productos disp
-    // this.porductService.getAllproducto().subscribe((data) => {
-    //   this.productosList = data;
-    // });
+    this.premioInfo = new Premio(0, '', [], "", "");
     this.formButtonLayoutTitle = 'Crear';
     this.createPromoform.reset();
   }
 
   selectedPromo(promo: Premio): void {
     console.log('Entrando a selectedPromo');
-    console.log('Valor de promo:', promo);
+    console.log('Valor de promo:', promo.fechainicio);
     this.premioInfo = promo;
-    console.log('precio nuevo: ', this.premioInfo.precioNuevo);
     if (promo) {
       if (promo.id_promocion !== undefined) {
-        // this.premioInfo = { ...promo, id_promocion: promo.id_promocion };
+
 
         // Llamada asíncrona
         this.promoService
@@ -120,11 +103,10 @@ export class PremiosComponent {
           .subscribe(
             (data) => {
               console.log('Respuesta de getArticulosPorPromocion:', data);
-
               this.articulosXPromo = data;
   
               console.log('this.articulosXPromo:', this.articulosXPromo);
-              // this.productosList = this.articulosXPromo;
+      
               this.formButtonLayoutTitle = 'Actualizar';
               this.createLayoutActivate = false;
               this.updateLayoutActivate = true;
@@ -170,10 +152,10 @@ export class PremiosComponent {
     let precioNuevo: number = parseInt(
       '' + this.createPromoform.value.precioNuevo
     );
-    let fechaInicio: Date = new Date(
-      '' + this.createPromoform.value.fechaInicio
-    );
-    let fechaFin: Date = new Date('' + this.createPromoform.value.fechaFin);
+    // let fechaInicio: Date = new Date('' + this.createPromoform.value.fechaInicio);
+    // let fechaFin: Date = new Date('' + this.createPromoform.value.fechaFin);
+    let fechaInicio: string = '' + this.createPromoform.value.fechaInicio;
+    let fechaFin: string = '' + this.createPromoform.value.fechaFin;
 
     // let productosIds: number[] = this.productosSeleccionados.map(producto => producto.id_articulo);
     let productosIds: number[] = this.productosSeleccionados
@@ -185,7 +167,6 @@ export class PremiosComponent {
         id_promocion,
         descripcion,
         productosIds,
-        precioNuevo,
         fechaInicio,
         fechaFin
       );
@@ -196,7 +177,6 @@ export class PremiosComponent {
         id_promocion,
         descripcion,
         productosIds,
-        precioNuevo,
         fechaInicio,
         fechaFin
       );

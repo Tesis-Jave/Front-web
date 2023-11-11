@@ -3,16 +3,14 @@ export class Premio {
       public id_promocion: number,
       public descripcion: string,
       public articuloIds: number[], 
-      public precioNuevo: number,
-      public fechaInicio: Date,
-      public fechaFin: Date
+      public fechainicio: string,
+      public fechafin: string
     ) {}
   
     public static getProperties(): Array<string> {
       let premio: string[] = [
         'Id',
-        'Descripcion', 
-        'PrecioNuevo',
+        'Nombre', 
         'FechaInicio',
         'FechaFin'
       ];
