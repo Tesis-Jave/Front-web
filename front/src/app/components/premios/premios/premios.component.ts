@@ -53,6 +53,8 @@ export class PremiosComponent {
   createLayoutActivate: boolean = true;
   updateLayoutActivate: boolean = false;
 
+  productosDefault: number[] = [];
+
   ngOnInit(): void {
     this.labels = Premio.getProperties();
     this.labels.push('Acciones');
@@ -86,9 +88,8 @@ export class PremiosComponent {
   }
 
   selectedPromo(promo: Premio): void {
-    console.log('Entrando a selectedPromo');
-    console.log('Valor de promo:', promo.fechainicio);
     this.premioInfo = promo;
+    console.log('el id de la actual es: ', this.premioInfo.id_promocion)
     if (promo) {
       if (promo.id_promocion !== undefined) {
         // Llamada asíncrona
@@ -96,10 +97,15 @@ export class PremiosComponent {
           .getArticulosPorPromocion(promo.id_promocion)
           .subscribe(
             (data) => {
-              console.log('Respuesta de getArticulosPorPromocion:', data);
+              // console.log('Respuesta de getArticulosPorPromocion:', data);
               this.articulosXPromo = data;
 
-              console.log('this.articulosXPromo:', this.articulosXPromo);
+              // Limpia la lista de productos seleccionados eliminando valores nulos
+              this.productosDefault = this.articulosXPromo
+                .filter((producto) => producto.id_articulo !== null)
+                .map((producto) => producto.id_articulo as number);
+
+              // console.log('this.articulosXPromo:', this.articulosXPromo);
 
               this.formButtonLayoutTitle = 'Actualizar';
               this.createLayoutActivate = false;
@@ -120,51 +126,30 @@ export class PremiosComponent {
     }
   }
 
-  productoEstaEnPromo(producto: Articulo): boolean {
-    for (let i = 0; i < this.articulosXPromo.length; i++) {
-      // console.log('antes: ', this.articulosXPromo[i])
-      // console.log('producrto ', producto)
-      if (this.articulosXPromo[i].id_articulo === producto.id_articulo) {
-        console.log('entro a if: ');
-
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   get productosSeleccionados(): number[] {
     return this.createPromoform.value.productosSeleccionados;
   }
 
   onSubmit() {
-    let id_promocion: number = parseInt(
-      '' + this.createPromoform.value.id_promocion
-    );
     let descripcion: string = '' + this.createPromoform.value.descripcion;
-    let precioNuevo: number = parseInt(
-      '' + this.createPromoform.value.precioNuevo
-    );
     let fechaInicio: string = '' + this.createPromoform.value.fechaInicio;
     let fechaFin: string = '' + this.createPromoform.value.fechaFin;
 
     // Verificar si productosSeleccionados está definido y no es nulo
-    let productosSeleccionados =
-      this.createPromoform.value.productosSeleccionados;
-    let productosIds: number[] = productosSeleccionados
-      ? productosSeleccionados
-      : [];
-      
+    let productosSeleccionados = this.createPromoform.value.productosSeleccionados;
+    let productosIds: number[] = productosSeleccionados? productosSeleccionados: [];
+
     console.log('productos ids', productosIds);
     if (this.updateLayoutActivate) {
       let promo = new Premio(
-        id_promocion,
+        this.premioInfo.id_promocion,
         descripcion,
         productosIds,
         fechaInicio,
         fechaFin
       );
+      console.log(fechaFin)
+      console.log(fechaInicio)
       this.updatePromo(promo, productosIds);
     }
     if (this.createLayoutActivate) {

@@ -84,7 +84,9 @@ export class PremiosService {
       'Bearer ' + this.cookies.get('token')
     );
     promo.articulosIds = productosIds;
-    return this.http.put<Premio>(
+    console.log( 'URL::',this.apiUrl + this.ext + 'A' + '/' + promo.id_promocion)
+    console.log('Promocion: ', promo)
+    return this.http.patch<Premio>(
       this.apiUrl + this.ext + 'A' + '/' + promo.id_promocion,
       promo,
       { headers }

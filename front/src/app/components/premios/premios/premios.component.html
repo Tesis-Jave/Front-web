@@ -63,19 +63,19 @@
           <div class="input-container">
             <label>Fecha inicio de promoción</label>
             <input
-              type="date"
+              type="text"
               formControlName="fechaInicio"
               placeholder="Ingrese la fecha de inicio para la promoción"
-              [ngModel]="premioInfo.fechainicio"
+              [ngModel]="premioInfo.fechainicio | date:'dd/MM/yyyy'"
             />
           </div>
           <div class="input-container">
             <label>Fecha fin de promoción</label>
             <input
-              type="date"
+              type="text"
               formControlName="fechaFin"
               placeholder="Ingrese la fecha de finalización para la promoción"
-              [ngModel]="premioInfo.fechafin"
+              [ngModel]="premioInfo.fechafin | date:'dd/MM/yyyy'"
             />
           </div>
 
@@ -83,7 +83,7 @@
             <label>Seleccionar Productos</label>
             <mat-form-field appearance="fill">
               <mat-label>Productos</mat-label>
-              <mat-select formControlName="productosSeleccionados"  multiple >
+              <mat-select formControlName="productosSeleccionados"  multiple  [(value)]="productosDefault">
                 <mat-option *ngFor="let producto of productosList" [value]="producto.id_articulo">
                   {{ producto.descripcion }}
                 </mat-option>
