@@ -2,7 +2,7 @@ export class Premio {
     constructor(
       public id_promocion: number,
       public descripcion: string,
-      public articuloIds: number[], 
+      public articulosIds: number[], 
       public fechainicio: string,
       public fechafin: string
     ) {}

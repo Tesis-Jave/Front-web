@@ -33,21 +33,17 @@ export class PremiosComponent {
       descripcion: [''],
       fechaInicio: [''],
       fechaFin: [''],
-      productosSeleccionados: [],
+      productosSeleccionados: [[]],
     });
   }
 
   createPromoform: FormGroup;
 
   labels: string[] = [];
-  premioInfo: Premio = new Premio(0, '', [], "", "");
+  premioInfo: Premio = new Premio(0, '', [], '', '');
   premioList: Premio[] = [];
 
-
-
   productosList: Articulo[] = [];
-
-  productosSeleccionados: Articulo[] = []; // Lista de productos seleccionados
 
   idPromocion: number = 0;
   articulosXPromo: Articulo[] = [];
@@ -59,7 +55,7 @@ export class PremiosComponent {
 
   ngOnInit(): void {
     this.labels = Premio.getProperties();
-    this.labels.push("Acciones");
+    this.labels.push('Acciones');
 
     this.getPremios();
 
@@ -79,13 +75,12 @@ export class PremiosComponent {
           .getArticulosPorPromocion(this.idPromocion)
           .subscribe((data) => {
             this.articulosXPromo = data;
-
           });
       });
   }
 
   closeInputFormLayout() {
-    this.premioInfo = new Premio(0, '', [], "", "");
+    this.premioInfo = new Premio(0, '', [], '', '');
     this.formButtonLayoutTitle = 'Crear';
     this.createPromoform.reset();
   }
@@ -96,8 +91,6 @@ export class PremiosComponent {
     this.premioInfo = promo;
     if (promo) {
       if (promo.id_promocion !== undefined) {
-
-
         // Llamada asíncrona
         this.promoService
           .getArticulosPorPromocion(promo.id_promocion)
@@ -105,9 +98,9 @@ export class PremiosComponent {
             (data) => {
               console.log('Respuesta de getArticulosPorPromocion:', data);
               this.articulosXPromo = data;
-  
+
               console.log('this.articulosXPromo:', this.articulosXPromo);
-      
+
               this.formButtonLayoutTitle = 'Actualizar';
               this.createLayoutActivate = false;
               this.updateLayoutActivate = true;
@@ -128,22 +121,22 @@ export class PremiosComponent {
   }
 
   productoEstaEnPromo(producto: Articulo): boolean {
-
-    for(let i = 0 ; i < this.articulosXPromo.length ; i++){
+    for (let i = 0; i < this.articulosXPromo.length; i++) {
       // console.log('antes: ', this.articulosXPromo[i])
       // console.log('producrto ', producto)
-      if(this.articulosXPromo[i].id_articulo === producto.id_articulo ){
-        console.log('entro a if: ')
+      if (this.articulosXPromo[i].id_articulo === producto.id_articulo) {
+        console.log('entro a if: ');
 
         return true;
-
       }
     }
 
     return false;
   }
-  
-  
+
+  get productosSeleccionados(): number[] {
+    return this.createPromoform.value.productosSeleccionados;
+  }
 
   onSubmit() {
     let id_promocion: number = parseInt(
@@ -153,16 +146,17 @@ export class PremiosComponent {
     let precioNuevo: number = parseInt(
       '' + this.createPromoform.value.precioNuevo
     );
-    // let fechaInicio: Date = new Date('' + this.createPromoform.value.fechaInicio);
-    // let fechaFin: Date = new Date('' + this.createPromoform.value.fechaFin);
     let fechaInicio: string = '' + this.createPromoform.value.fechaInicio;
     let fechaFin: string = '' + this.createPromoform.value.fechaFin;
 
-    // let productosIds: number[] = this.productosSeleccionados.map(producto => producto.id_articulo);
-    let productosIds: number[] = this.productosSeleccionados
-      .filter((producto) => producto.id_articulo !== null) // Filtra los elementos que no son null
-      .map((producto) => producto.id_articulo as number);
-
+    // Verificar si productosSeleccionados está definido y no es nulo
+    let productosSeleccionados =
+      this.createPromoform.value.productosSeleccionados;
+    let productosIds: number[] = productosSeleccionados
+      ? productosSeleccionados
+      : [];
+      
+    console.log('productos ids', productosIds);
     if (this.updateLayoutActivate) {
       let promo = new Premio(
         id_promocion,
@@ -174,8 +168,7 @@ export class PremiosComponent {
       this.updatePromo(promo, productosIds);
     }
     if (this.createLayoutActivate) {
-      let promo = new Premio(
-        id_promocion,
+      let promo = new PromoNueva(
         descripcion,
         productosIds,
         fechaInicio,
@@ -213,8 +206,9 @@ export class PremiosComponent {
 
   //create promo con ids de promo
   addNewPromo(promo: PromoNueva, productosIds: number[]): void {
+    console.log('Datos a enviar:', promo, productosIds);
     this.promoService.createPromo(promo, productosIds).subscribe((data) => {
-      console.log(data);
+      console.log('respuesta del servidor: ', data);
       this.getPremios();
       this.createPromoform.reset();
     });

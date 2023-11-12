@@ -72,8 +72,8 @@ export class PremiosService {
       'Authorization',
       'Bearer ' + this.cookies.get('token')
     );
-    promo.articuloIds = productosIds;
-    return this.http.post<PromoNueva>(this.apiUrl + this.ext, promo, {
+    promo.articulosIds = productosIds;
+    return this.http.post<PromoNueva>(this.apiUrl + this.ext + 'A', promo, {
       headers,
     });
   }
@@ -83,9 +83,9 @@ export class PremiosService {
       'Authorization',
       'Bearer ' + this.cookies.get('token')
     );
-    promo.articuloIds = productosIds;
+    promo.articulosIds = productosIds;
     return this.http.put<Premio>(
-      this.apiUrl + this.ext + '/' + promo.id_promocion,
+      this.apiUrl + this.ext + 'A' + '/' + promo.id_promocion,
       promo,
       { headers }
     );

@@ -83,8 +83,8 @@
             <label>Seleccionar Productos</label>
             <mat-form-field appearance="fill">
               <mat-label>Productos</mat-label>
-              <mat-select formControlName="productosSeleccionados"  multiple  >
-                <mat-option *ngFor="let producto of productosList">
+              <mat-select formControlName="productosSeleccionados"  multiple >
+                <mat-option *ngFor="let producto of productosList" [value]="producto.id_articulo">
                   {{ producto.descripcion }}
                 </mat-option>
               </mat-select>
