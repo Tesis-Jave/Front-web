@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+
+
+
+/*
+Icono de volver
+*/
+.with-icon {
+    background-image: url('/assets/images/leftArrowB.png');
+    background-size: 20px 20px; /* Ajusta el tamaño del icono según tus necesidades */
+    background-size: 100% 100%; /* Ajusta las dimensiones al tamaño completo de la imagen */
+    background-repeat: no-repeat;/* Ajusta la posición del icono según tus necesidades */
+  }
+  .goback-button {
+    margin-left: 0%;
+    margin-top: 0%;
+    border-radius: 50% !important;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none !important;
+    padding: 15px !important;
+    -webkit-transition: background-color 1s, color 1s, -webkit-transform 0.1s;
+       transition: background-color 0.5s, transform 0.2s;
+  }
+  
+  .goback-button:hover {
+    /* background-color: rgba(255, 255, 255, 0.8) !important; */
+    background-color: rgba(44, 37, 37, 0.8) !important;
+    color: black;
+    -webkit-transform: translateX(-5px);
+    -webkit-box-shadow: 5px 0px 18px 0px rgba(105,105,105,0.8);
+    -moz-box-shadow: 5px 0px 18px 0px rgba(105,105,105,0.8);
+    box-shadow: 5px 0px 18px 0px rgba(105,105,105,0.8);
+  }
+
+  /*
+  * Boton con animacion generico
+  */
+  .menu-buttons{
+    border-radius: 5px;
+    padding: 10px 10px;
+    border: none;
+    color: white;
+    transition: 300ms;
+
+    &:hover {
+        opacity: 90%;
+        transform: scale(1.05);
+    }
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

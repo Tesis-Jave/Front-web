@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>División de Pantalla</title>
+</head>
+<body>
+    <div class="mitad-izquierda">
+        <img src="https://pbs.twimg.com/profile_images/602842931339390976/OsL7t3SX_400x400.jpg" alt="Imagen">
+    </div>
+    <div class="mitad-derecha">
+        <div class="login-box" *ngIf="authenticated == 0" id="form_log">
+            <form id="formulario" (submit)="onSubmit()" [formGroup]="checkOutForm">
+                <h2>Iniciar Sesión</h2>
+                <div class="login-input">
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" formControlName="usuario" required="required">
+                </div>
+                <div class="login-input">
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" formControlName="password" required="required">
+                </div>
+                <div id="mensaje-error" *ngIf="failed" class="error-message">
+                  <p *ngIf="invalidUsername">Usuario incorrecto</p>
+                  <p *ngIf="invalidPassword">Contraseña incorrecta</p>
+                </div>
+                <div class="login-button">
+                    <button type="button" (click)="onSubmit()">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="authenticated == 1">
+          <p class="mb-0"> Bienvenido {{userName}} </p>
+        </div>
+    </div>
+</body>
+</html>
+

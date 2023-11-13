@@ -1,0 +1,153 @@
+<body>
+  <div class="left-side">
+    <div class="button-container">
+      <button
+      type="button"
+      class="menu-buttons"
+      (click)="closeInputFormLayout()"
+    >
+      Limpiar
+    </button>
+    </div>
+    <div class="jave-logo">
+      <img src="\assets\images\JAVEPUNTOSB.png" alt="" />
+    </div>
+
+    <div class="button-container">
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('productos')"
+      >
+        Productos
+      </button>
+
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="navigateTo('premios')"
+      >
+        Premios
+      </button>
+      <button
+        type="button"
+        class="menu-buttons"
+        (click)="cerrarSesion()"
+      >
+        Cerrar sesión
+      </button>
+    </div>
+
+    <div>
+      <button
+        class="btn btn-lg goback-button text-center with-icon"
+        (click)="navigateTo('home')"
+      >
+        <span><i class="fa fa-arrow-left fa-3x"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="right-side">
+    <div class="top-box">
+      <div class="data-form-layout">
+        <form [formGroup]="createCafeteriaform" (ngSubmit)="onSubmit()">
+
+          <div class="input-container">
+            <label>Descripcion</label>
+            <input
+              type="text"
+              formControlName="descripcion"
+              placeholder="Ingrese la descripcion de la cafeteria"
+              [ngModel]="cafeteriaInfo.descripcion"
+            />
+          </div>
+          <div class="input-container">
+            <label>Longitud</label>
+            <input
+              type="number"
+              formControlName="longitud"
+              placeholder="Ingrese la ubicación"
+              [ngModel]="cafeteriaInfo.longitud"
+            />
+          </div>
+          <div class="input-container">
+            <label>Latitud</label>
+            <input
+              type="number"
+              formControlName="latitud"
+              placeholder="Ingrese la ubicación"
+              [ngModel]="cafeteriaInfo.latitud"
+            />
+          </div>
+          <div class="input-container">
+            <label>Tipo de cafeteria</label>
+            <input
+              type="text"
+              formControlName="tipo"
+              placeholder="Ingrese el tipo"
+              [ngModel]="cafeteriaInfo.tipo"
+            />
+          </div>
+          <div class="input-container">
+            <label>Id tarifa</label>
+            <input
+              type="number"
+              formControlName="id_tarifa"
+              placeholder="Ingrese el id de la tarifa"
+              [ngModel]="cafeteriaInfo.id_tarifa"
+            />
+          </div>
+          <div class="accept-button">
+            <button type="submit" class="btn btn-success custom-button">
+              {{formButtonLayoutTitle}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="middle-box">
+      <div class="search-bar">
+        <input class="form-control" type="text" placeholder="Busqueda" />
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="data-container">
+        <div class="labels-container">
+          <div
+            class="column-info"
+            *ngFor="let category of labels; let last = last"
+            [ngClass]="{ 'last-label': last }"
+          >
+            <p class="label">{{ category }}</p>
+          </div>
+        </div>
+
+        <div
+          class="info-container"
+          *ngFor="let cafeteria of cafeteriaList; let last = last"
+          [ngClass]="{ 'last-row': last }"
+        > 
+          <div class="row-container">
+            <!-- <p class="parameter-info">{{ service.id }}</p> -->
+            <p class="parameter-info">{{cafeteria.id_cafeteria}}</p>
+            <p class="parameter-info">{{cafeteria.descripcion}}</p>
+            <p class="parameter-info">{{cafeteria.longitud}}</p>
+            <p class="parameter-info">{{cafeteria.latitud}}</p>
+            <p class="parameter-info">{{cafeteria.id_tarifa}}</p>
+            <p class="parameter-info">{{cafeteria.tipo}}</p>
+            <div class="button-layout">
+              <button class="edit button" (click)="selectedCafeteria(cafeteria)">
+                Modificar
+              </button>
+              <button class="delete button" (click)="deleteCafeteria(cafeteria.id_cafeteria)">
+                Eliminar
+              </button> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
